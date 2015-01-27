@@ -1,0 +1,119 @@
+<main role="main" ng-controller="exploreController">
+   <div class="panel-body" id="explore">
+      <section class="content-primary col-sm-3">
+			<div class="panel panel-default ">
+			    <table class="table ">
+				   <tr class="topic-heading" style="padding-top:3em;">
+				      <th ng-click="toggleExploreMenu()" class="visible-xs">
+					     <span>Categories</span>
+						 <a class="icon fa fa-arrow-{{navPointer}} pull-right" style="margin-left:.5em;"></a>
+						 <span class="pull-right">{{menuItems.length}}</span>
+					  </th>
+					  <th class="hidden-xs" style="padding-top:3em;">
+					     <span>Categories</span>
+						 <a class="icon fa fa-arrow-{{navPointer}} pull-right visible-xs" style="margin-left:.5em;"></a>
+						 <span class="pull-right">{{menuItems.length}}</span>
+					  </th>
+				   </tr>
+			    </table>
+				   
+			    <div class="forum-category panel-body ngFade" ng-show="navPointer=='down'" style="max-height:40em; overflow:auto">
+				    <table class="table">	
+                         <div class="input-group" style="margin-bottom:.5em;">
+							   <input type="text" class="form-control" placeholder="filter results" ng-model="filterText">
+							   <a class="input-search-icon"><i class="icon fa fa-filter "></i></a>
+						 </div>					
+						 <div >
+							 <tr ng-repeat="menu in menuItems | filter:filterText">
+								<td ng-click="activate($index)" class="topic" ng-class="$index==activeIndex ? 'topic-active':''">
+								   {{menu | capitalize}}
+								   <span class="pull-right">{{getCategoryCount(menu)}}</span>
+								</td>
+							 </tr>
+						 </div>
+				     </table>
+				</div>
+		    </div>
+		</section>
+		<section class="content-secondary col-sm-7">
+		    <div class="panel panel-body-explore off-background">
+			
+			    <div class="panel-heading subNav-container"  style="padding-top:2.4em;">
+					<div class="input-group-btn">
+					   <h3>{{selected | capitalize}}</h3><!--@DEBUG extra padding for headers in effect in IE-->
+                       <sub-nav></sub-nav>
+					</div>
+			    </div>
+
+				<div class="alert alert-danger" ng-show="data.error">
+				   <p>
+					   Error ({{data.error.status}}). The course Briefs were not loaded . the link may be broken
+					   or entered incorrectly.
+					   <a href="/app.html" class="alert-link"> Click here to try again</a>
+				   </p>
+				</div>
+				<div class="panel panel-default ngFade course-brief" ng-repeat="course in shown" ng-hide="data.error">
+				   <div class="panel-heading">
+					  <div class="panel-title">
+						 <h4 class="title"> {{course.title}}</h4>
+					  </div>
+				   </div>
+				   <span ng-click="loadCourse($index , 'view')">
+					   <div class="panel-body">
+					      <div class="col-sm-6">
+						     <img src="img/okwu.jpg" style="width:100%;">
+						  </div>
+						  <div class="col-sm-6">
+						     <h5><b>Description</b></h5>
+						     <p>{{course.description}}</p>
+						  </div>
+					   </div>
+					   <div class="panel-footer">
+						  <a class="footer-icon"><i class="icon fa fa-thumbs-up"> {{course.ratings.likes}}</i></a>
+						  <a class="footer-icon"><i class="icon fa fa-thumbs-down"> {{course.ratings.dislikes}}</i></a>
+						  <a class=""> {{course.price | currency}}</a>
+						  <a class="pull-right footer-icon-last">
+						     <button class="btn btn-brand btn-xs"><i class="icon fa fa-eye"></i> View</button>
+						  </a>
+					   </div>
+					</span>
+				</div>
+				<div style="padding:1em;" ng-show="selectedBriefs.length==0">
+				   <empty-category-message>
+				</div>
+			</div>
+			<div class="pager" ng-hide="shown.length<4">
+			   <button class=" btn btn-brand no-outline" ng-click="loadMore()">Load More</button>
+			</div>
+	</section>	
+	
+	<div class="col-sm-2 ads-box hidden-xs">
+	   <div class="panel panel-default">
+	      <div class="panel-heading">
+		      <span class="panel-title">
+			     Ads here
+			  </span>
+		  </div>
+		  <div class="panel-body">
+		     <a><img src="img/okwu.jpg"> name of advert</a>
+		     <span>
+			     life accusamus terry richardson ad squid. 3 w
+			 </span>
+		  </div>
+	   </div>
+	    <div class="panel panel-default">
+	      <div class="panel-heading">
+		      <span class="panel-title">
+			     Ads here
+			  </span>
+		  </div>
+		  <div class="panel-body">
+		     <a><img src="img/ads.jpg"> name of advert</a>
+		     <span>
+			     life accusamus terry richardson ad squid. 3 w
+			 </span>
+		  </div>
+	   </div>
+	</div>
+   </div>
+</main>

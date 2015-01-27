@@ -1,0 +1,16 @@
+{
+  "userData":{
+		"userProfile": {
+			"userName":"@userName",
+			"img": "img/me.jpeg",
+			"coverImg": "img/logo6.jpg",
+			"email": "@email",
+			"phone": "@phone",
+			"website": "@web site",
+			"aboutMe": "A brief information about yourself , where you school , work things you have done in the past years activities and people you are involved with and so much more"
+		},
+		"teaching": [],
+		"learning": []
+	},
+	"secret":"@secret"
+}

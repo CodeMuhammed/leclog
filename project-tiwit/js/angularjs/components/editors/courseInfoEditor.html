@@ -1,0 +1,7 @@
+ <div class="panel panel-heading off-background" ng-show="editorMode">
+	  <textarea class="form-control" placeholder="Enter course instructions here" style="height:12em ; margin-bottom:1em;" ng-model="data.editedContentBody" ng-click="setFocus('editedContentBody')"></textarea>
+	  <a type="button" class="btn btn-default btn-sm " ng-click="cancel()"><i class="icon fa fa-step-backward"></i> cancel</a>
+	  <div class="btn-group pull-right">
+		 <a type="button" class="btn btn-brand btn-sm " ng-click="save(0)"><i class="icon fa fa-save"></i> save</a>
+	  </div>
+ </div>

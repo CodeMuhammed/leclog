@@ -1,0 +1,21 @@
+[
+	{
+	  courseId: {
+		  courseRef:("9346jtkdf4359yekg5"),
+		  created: ("15-march-2014"),
+		  courseBy: {
+			userRef: ("gdfk485wknf45uw80ldsk45"),
+			username: ("Muhammed Ali"),
+		  }  
+	  },
+	  students: "45",
+	  title: "Ordinary differential equations",
+	  description: "Suspendisse et arcu felis, ac gravida turpis. Suspendisse potenti.Ut porta rhoncus ligula, sed fringilla felis feugiat eget. In non purus quis elit iaculis tincidunt. Donec at ultrices est." ,
+	  category: "Sciences",
+	  ratings: {
+		likes:"960",
+		dislikes:"33",
+		featured:true,
+	  },
+	  courseAccess: ("Trial"), 
+	}]

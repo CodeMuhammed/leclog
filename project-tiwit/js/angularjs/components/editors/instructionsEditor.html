@@ -1,0 +1,9 @@
+ <div class="panel panel-heading off-background" ng-show="editorMode" style="margin-bottom:1em;">    
+	  <input class="form-control" placeholder="Enter course title here" ng-model="data.editedContentTitle" ng-click="setFocus('editedContentTitle')" >
+	  <textarea class="form-control" placeholder="Enter course instructions here" style="height:12em; margin-bottom:1em;margin-top:1em;" ng-model="data.editedContentBody" ng-click="setFocus('editedContentBody')"></textarea>
+	  <button type="button" class="btn btn-default btn-xs"><i class="icon fa fa-camera"></i> Add Media</button>
+	  <div class="btn-group pull-right">
+		 <a type="button" class="btn btn-default btn-xs " ng-click="cancel()"><i class="icon fa fa-step-backward"></i> cancel</a>
+		 <a type="button" class="btn btn-brand btn-xs" ng-click="save($index)"><i class="icon fa fa-save"></i> save</a>
+	  </div>
+ </div>

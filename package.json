@@ -1,0 +1,13 @@
+{
+  "name": "leclog",
+  "version": "0.0.0",
+  "description": "leclog  >> your lecture log",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "connect": "~3.0.1",
+	"serve-static": "1.2.3"
+  }
+}

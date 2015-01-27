@@ -1,0 +1,129 @@
+<main role="main" ng-controller="profileController">
+   <div class="panel-body category" id="explore">
+        <encryptor></encryptor>
+		<section class="content-secondary ">
+		   <div class="panel panel-default panel-body-explore off-background col-sm-7" style="padding:0; margin:0;">
+		        <div class="panel-body profile-body">
+					  <span class="img-span hidden-xs">
+						 <a href="#"><img ng-src={{data.userProfile.img}} alt="sample product"></a>
+					  </span>
+					  <div class="profile-bg-top" style="background: #191919 url({{data.userProfile.coverImg}}) center center no-repeat; background-size:cover;"></div>
+				</div>
+				
+				<div class="panel-heading subNav-container" style="border-radius:0px;">
+					<div class="input-group-btn">
+                       <sub-nav></sub-nav>
+					</div>
+			    </div>
+				
+				
+				<div ng-show="info">
+					<div class="panel panel-default">
+						   <table class="table table-default">
+							  <tbody>
+								<tr class="explore-category">
+									<td>Teaching <span class="badge">{{data.teaching.length}} </span></td>
+									<td>Students <span class="badge">{{getStudentCount()}}</span></td>
+									<td>Learning <span class="badge">{{data.learning.length}}</span></td>
+									<td><button ng-click="saveInfo()" class="btn btn-brand btn-xs pull-right no-outline"> <i class="icon fa fa-edit" ></i> Edit Info</button></td>
+								 </tr>
+							  </tbody>
+						   </table>
+						</div>
+					  
+					   <div class="panel-body">
+						   <div class="col-md-6">
+								 <div style="margin-bottom:4em;" ng-hide="editInfo">
+									  <p>{{data.userProfile.aboutMe}}</p>
+								  </div>
+								  <div style="margin:0;" ng-show="editInfo">
+									  <textarea class="form-control" ng-model="data.userProfile.aboutMe" style="margin-top:1em; height:20em;"></textarea>
+									  <button class="btn btn-brand btn-block" style="margin-top:1em;" ng-click="saveInfo()">save</button> 
+								  </div>
+							 </div>
+						   <div class="col-md-6" >
+								  <div style="margin:0;" ng-hide="editInfo">  
+									  
+									  <p>User name: {{data.userProfile.userName}}</p>
+									  <p>Email: {{data.userProfile.email}}</p>
+									  <p>Phone :{{data.userProfile.phone}}</p>
+									  <p>Website :<a>{{data.userProfile.website}}</a></p>
+								  </div>
+								  
+								  <div style="margin-top:1em;" ng-show="editInfo">
+									User name:  <input class="form-control" ng-model="data.userProfile.userName" style="margin-bottom:1em;">
+									Email:  <input class="form-control" ng-model="data.userProfile.email" style="margin-bottom:1em;">
+									Phone : <input class="form-control" ng-model="data.userProfile.phone" style="margin-bottom:1em;">
+									Website : <input class="form-control" ng-model="data.userProfile.website" style="margin-bottom:1em;">
+								  </div>
+							 </div>
+					  </div>
+			   </div>
+			   
+			   <div ng-show="data.teaching.length == 0 && teaching">
+				   <empty-category-message>
+			   </div>
+			   <div class="panel panel-default ngFade course-brief" ng-repeat="course in data.teaching" ng-show="teaching"> 
+				   <div class="panel-heading">
+					  <div class="panel-title">
+						  <h4>{{course.title}} </h4>
+					  </div>
+				   </div>
+				   <span>
+					   <div class="panel-body" ng-click="loadCourse($index , 'view')">
+					      <div class="col-sm-5">
+						     <img src="img/okwu.jpg" style="width:100%;">
+						  </div>
+						  <div class="col-sm-7">
+						     <h5><b>Description</b></h5>
+						     <p>{{course.description}}</p>
+						  </div>
+					   </div>
+					   <div class="panel-footer">
+						  <a class="footer-icon"><i class="icon fa fa-thumbs-up"> {{course.ratings.likes}} </i></a>
+						  <a class="footer-icon"><i class="icon fa fa-thumbs-down"> {{course.ratings.dislikes}} </i></a>
+						  <a href="#" class="footer-icon"><i class="icon fa fa-question"></i> {{course.notifications.count}}</a>
+						  <a tooltip-placement="top" tooltip="edit course" class="footer-icon" ng-click="editMyCourse($index)"><i class="icon fa fa-edit"></i> </a>
+						  <a tooltip-placement="top" tooltip="view course" class="pull-right footer-icon-last"><i class="icon fa fa-eye"></i></a>
+					   </div>
+				    </span>
+				</div>
+				<div ng-show="data.learning==0 && learning">
+				      <p class="jumbotron">
+						   Oh no it seems you are currently not enrolled in any class
+						   <a href="#/explore" ng-click="activateNav('explore')"> click here</a> to start exploring for courses
+					  </p>
+				</div>
+				<div class="panel panel-default course-brief" ng-repeat="course in data.learning" ng-show="learning">
+				  
+				   <div class="panel-heading">
+					  <div class="panel-title">
+						 <a href="#"><img ng-src={{course.imageTumbnail}} alt="sample product" /></a>
+						 <h3>{{course.title}}</h3>
+					  </div>
+				   </div>
+				   <span ng-click="loadCourse($index , 'view')">
+					   <div class="panel-body">
+						    <div class="col-sm-5">
+								 <img src="img/okwu.jpg" style="width:100%;">
+							  </div>
+							  <div class="col-sm-7">
+								 <h5><b>Description</b></h5>
+								 <p>{{course.description}}</p>
+							  </div>
+					   </div>
+					   <div class="panel-footer">
+						  <a href="#"><i class="icon fa fa-question footer-icon"> {{course.notifications.count}}</i></a>
+						  <a tooltip-placement="top" tooltip="view course" class="pull-right footer-icon-last"><i class="icon fa fa-eye"></i></a>
+						  <progressbar max="100" value="course.progress"><span style="white-space:nowrap;">{{course.progress}} / {{max}}%</span></progressbar>
+					   </div>
+				   </span>
+				</div>
+			    <div ng-show="settings">
+		           This is the settings view
+		        </div>
+		   </div>
+		  
+	  </section>
+   </div>
+</main>

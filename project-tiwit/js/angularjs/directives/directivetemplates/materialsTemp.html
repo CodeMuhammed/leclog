@@ -1,0 +1,31 @@
+<div class="well materials">
+       <div class="panel panel-heading" ng-click="displayMaterials(tempCategory)" ng-class="displayedMaterials==tempCategory ? 'materials-active' :''">
+	      <div class="panel-title">
+		      {{tempCategory}}
+			 <i class="icon fa fa-caret-right pull-right" ng-hide="displayedMaterials==tempCategory"></i>
+			 <i class="icon fa fa-caret-down pull-right" ng-show="displayedMaterials==tempCategory"></i>
+		  </div>
+	   </div>
+	   <span ng-show="displayedMaterials==tempCategory">
+		   <table class="table">
+			  <tbody>
+				 <tr ng-repeat="item in data.contents.materials[tempCategory]" class="material-style">
+					<td ng-click="describe(tempCategory , $index)">
+					    <a>{{item.name}}</a>
+					    <div class="btn-group pull-right" ng-show="editorMode">
+							  <a type="button" class="btn btn-danger btn-xs " ng-click="deleteItem($index ,tempCategory)" ng-disabled="disableButton($index , tempCategory)"> del </a>
+							  <a type="button" class="btn btn-brand btn-xs "  ng-click="setActiveEditor($index , tempCategory)"> edit</a>
+						</div>
+						<span ng-hide="editorMode">
+						   <button class="btn btn-brand btn-xs pull-right no-outline"> view </button> 
+						</span>
+					</td>
+				 </tr>
+				 <tr></tr>
+			  </tbody>
+		   </table> 
+		   <div class="pager" ng-show="editorMode && activeEditorIndex==-1">
+			  <button class=" btn btn-default" ng-click="addNewItem(tempCategory)" style="outline:none">Add New <i class="icon fa fa-plus"></i></button>
+		   </div>
+	   </span>
+   </div>

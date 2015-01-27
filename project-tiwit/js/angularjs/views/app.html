@@ -1,0 +1,54 @@
+	 <div style="padding:0; margin:0;">
+        <!--[if lte IE 7]>
+            <p class="browsehappy">You are using an <b>outdated</b> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or activate Google Chrome frame to improve your experience.</p>
+        <![endif]-->
+      <div ng-controller="filterButtonController" id="mainView">
+        <header role="banner">
+		    <nav role="navigation" class="nav navbar-default navbar-fixed-top">
+		      <div class="container">
+			     <div class="navbar-header">
+				    <a class="navbar-brand brand-logo hidden-xs" ng-click="activateNav('explore')"><img ng-src="img/leclog.png" alt="telectual" height="40"></a>
+					<a class="navbar-brand brand-logo visible-xs" ng-click="activateNav('explore')"><img ng-src="img/leclogshort.png" alt="telectual" height="45"></a>
+					<a class="nav-image" style="background: #191919 url({{userRef.userImg}}) center center no-repeat; background-size:cover;"
+    				    ng-click="activateNav('profile')"></a>
+				    <button class="btn navbar-btn btn-link log-out btn-xs no-outline hidden-xs" ng-click="logOut()">log-out</button>
+					<ul class="nav navbar-nav" id="nav-static">
+                       <li ng-click="activateNav('explore')" ng-class="context=='explore' ? 'active bottom-line' : ''"><a><i class="icon fa fa-star"></i><span class="head-span"> Explore </span></a></li>					   
+					   <li ng-click="activateNav('editor')" ng-class="context=='editor' ? 'active bottom-line' : ''"><a><i class="icon fa fa-edit"></i><span class="head-span"> Editor </span></a></li>
+				    </ul>
+				    <ul class="nav navbar-nav hidden-xs">
+				        <li style="margin:0 0 0 30%;">
+					      <form class="navbar-form input-append ">
+						     <div class="form-group ">
+								<div class="input-group">
+									 <div class="input-group">
+										<input type="text" class="form-control searchbox-radius" id="search-filter" placeholder="filter results or search"
+  										         ng-model="searchText" >
+										<a class="input-search-icon" ng-click="searchHappyUser(searchText)"><i class="icon fa fa-search "></i></a>
+									 </div>
+						       </div>   
+						     </div>
+			              </form>
+					   </li> 
+				   </ul>
+			     </div>
+				 
+			  </div><!--./container-->
+		   </nav>
+		</header>
+	    
+<!--=======================view for displaying page contents===========================-->
+		 <span ng-controller="filteredDataController">
+		 
+			<span ng-view class="ngFade"></span>
+		 </span>   	 
+<!--=======================view for displaying page contents===========================-->
+   </div>
+	<footer role="contentinfo">
+	  <div class="container">
+		 <div class="social">
+		   <p>&copy; 2013-2014 , all rights reserved www.<a><img class="img-rounded" src="img/leclog.png" alt="leclog" height="20"></a>.com</p>
+		</div>  
+	  </div>
+   </footer>
+   </div>

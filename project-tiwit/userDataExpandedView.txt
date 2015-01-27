@@ -1,0 +1,58 @@
+{
+   userProfile:{
+     userName:"muhammed",
+	 email:"codemuhammed@gmail.com",
+	 phone:"08107654744",
+	 website:"www.telectual.com",
+	 userId:"12345",
+	 lastLogin: {date:"" , time:""},
+	 aboutMe:"A brief information about yourself , where you school , work things you have done in the past years activities and people you are involved with and so much more",
+   },
+   teaching :[
+       {
+	      courseId:"9346jtkdf4359yekg5",
+		  imageTumbnail:"img/logo.png",
+		  created:15,
+		  courseBy:{username:"Muhammed Ali"},
+		  students:{
+		     count:"35",
+			 infos:[],
+		  },
+		  title:"Ordinary differential equations",
+		  description:"Suspendisse et arcu felis, ac gravida turpis. Suspendisse potenti.Ut porta rhoncus ligula, sed fringilla felis feugiat eget. In non purus quis elit iaculis tincidunt. Donec at ultrices est.",
+		  category:"Sciences",
+		  ratings:{
+			 likes:"960",
+			 dislikes:"3",
+			 featured:true
+		  },
+		  courseAccess:"free",
+		  notifications:{
+			 count: "34",
+			 questions: {},
+			 enrolments: {},
+			 submits:{},
+		  },
+	   } ,
+   ],
+   learning :[
+        {
+		  courseId:"9346jtkdf4359yekg5",
+		  imageTumbnail:"img/logo.png",
+		  courseBy:{username:"Muhammed Ali"},
+		  students:30,
+		  title:"Ordinary differential equations",
+		  description:"Suspendisse et arcu felis, ac gravida turpis. Suspendisse potenti.Ut porta rhoncus ligula, sed fringilla felis feugiat eget. In non purus quis elit iaculis tincidunt. Donec at ultrices est.",
+		  category:"Sciences",
+		  progress: "33",
+		  notifications:{
+			 count: "34",
+			 logs: {},
+		  },
+	  },
+   ],
+}
+
+
+
+

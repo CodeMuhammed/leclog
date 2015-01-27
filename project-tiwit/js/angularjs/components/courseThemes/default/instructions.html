@@ -1,0 +1,32 @@
+<div class="panel-group">
+   <div class="well col-sm-9">
+	   <div class="panel panel-default" ng-repeat="topic in data.contents.instructions">
+			<span ng-hide="activeEditorIndex==$index">
+			   <div class="panel-heading ins-vid" ng-click="setActiveInsVideo($index , 'instructions')" ng-class="$index==activeInsVideo ? 'materials-active':''">
+				  <div class="panel-title">
+				      <b ng-bind-html="topic.title | capitalizeAll"></b>
+					  <i class="icon fa fa-caret-right pull-right" ng-hide="$index==activeInsVideo"></i>
+			          <i class="icon fa fa-caret-down pull-right" ng-show="$index==activeInsVideo"></i>
+					  <div class="btn-group pull-right" ng-show="editorMode">
+					      <button type="button" class="btn btn-danger btn-xs" ng-click="deleteItem($index , 'instructions')"> X </button>
+						  <button type="button" class="btn btn-brand btn-xs" ng-click="setActiveEditor($index , 'instructions')">edit</button>
+					  </div>
+				  </div> 
+				</div>
+				<div class="panel-collapse" ng-show="$index==activeInsVideo">
+				  <div class="panel-body">
+					<span ng-bind-html="topic.description"></span>
+				  </div>
+				</div>
+			</span>
+			<!--=================================================================-->
+				<div ng-include="getActiveEditor($index , 'instructions')"></div>
+			<!--=================================================================-->	
+	   </div>
+	   <div class="pager" ng-show="editorMode">
+	      <button class=" btn btn-default no-outline" ng-click="addNewItem('instructions')">Add New <i class="icon fa fa-plus"></i></button>
+	   </div>
+	   
+   </div>
+   <describe-material width="3"></describe-material>
+</div>

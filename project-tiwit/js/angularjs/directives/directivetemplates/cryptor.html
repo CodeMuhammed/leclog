@@ -1,0 +1,16 @@
+<div class="panel panel-default col-sm-3 hidden-xs">
+	<div class="panel-heading">
+	   password encryptor
+	</div>
+	<div class="panel-body">
+	   <input type="text" class="form-control" placeholder="enter random password" ng-model="password" style="margin-bottom:1em">	
+	   <div class="well"><code>{{result}}</code></div>
+	   
+	</div>
+	<div class="panel-footer">
+		<div class="btn-group">
+		   <button class="btn btn-default btn-xs " ng-click="reset()">reset</button>
+		   <button class="btn btn-brand btn-xs" ng-click="encrypt()">encrypt</button>
+		</div>
+	</div>
+ </div>

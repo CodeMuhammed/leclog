@@ -1,0 +1,16 @@
+<div class="" ng-hide="activeEditorIndex==-1 || !editorMode">
+   <input class="form-control" placeholder="Enter title here" ng-model="data.editedContentTitle" ng-click="setFocus('editedContentTitle')">
+   <textarea class="form-control" placeholder="Briefly describe the file here" style="height:6em; margin-top:1em;margin-bottom:1em;" ng-model="data.editedContentBody" ng-click="setFocus('editedContentBody')"></textarea>
+   <input class="form-control" placeholder="Enter url here" ng-model="data.editedContentUrl"
+                            ng-click="setFocus('editedContentUrl')" style="margin-bottom:1em;"
+							ng-show="materialUrl">
+   <div class="btn-group">
+	  <a type="button" class="btn btn-default btn-xs " ng-click="materialUrl=!materialUrl"><i class="icon fa fa-link"></i> link</a>
+	  <a type="button" class="btn btn-default btn-xs" ng-disabled="true">or</a>
+	  <a type="button" class="btn btn-default btn-xs " ng-click=""><i class="icon fa fa-file"></i> file</a>
+   </div>
+   <div class="btn-group pull-right">
+	  <a type="button" class="btn btn-default btn-xs " ng-click="cancel()"><i class="icon fa fa-step-backward"></i> cancel</a>
+	  <a type="button" class="btn btn-brand btn-xs " ng-click="save(activeEditorIndex)"><i class="icon fa fa-save"></i> save</a>
+   </div>
+</div>

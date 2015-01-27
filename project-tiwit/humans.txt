@@ -1,0 +1,18 @@
+# telectual.com
+# The humans responsible & technology colophon
+   muhammed ali -- co-founder--telectual.com
+   moses enenmonghale--co-founder--telectual.com
+
+# TEAM
+
+    <name> -- <role> -- <twitter>
+	#every other member will go here
+
+# THANKS
+
+    every body who encouraged me during me to do better especially my mom and dad
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3 , Angular.js
+    Normalize.css, jQuery, Modernizr

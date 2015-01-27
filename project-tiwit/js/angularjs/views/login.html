@@ -1,0 +1,268 @@
+<div style="padding:0; margin:0;" ng-controller="indexController">
+      <header role="banner">
+		<nav role="navigation" class="nav navbar-default navbar-fixed-top">
+		  <div class="container">
+			 <div class="navbar-header">
+				<a class="navbar-brand brand-logo hidden-xs" ng-click="activateNav('explore')"><img ng-src="img/leclog.png" alt="leclog" height="40"></a>
+			    <a class="navbar-brand brand-logo visible-xs" ng-click="activateNav('explore')"><img ng-src="img/leclogs.png" alt="leclog" height="45"></a>
+				<i class="icon fa fa-search hidden-sm hidden-md hidden-lg nav-search"ng-click="searchbox=!searchbox"></i>
+				<button class="btn navbar-btn btn-brand signin-btn no-outline" ng-click="toggleSignIn()">{{option}}</button>
+				<ul class="nav navbar-nav navbar" id="nav-static">
+				   <li class="active bottom-line"><a tooltip-placement="bottom" tooltip="home page"><i class="icon fa fa-flag"></i><span class="head-span"> Home</span></a></li>
+				   <li><a tooltip-placement="bottom" tooltip-html-unsafe="For all the latest infos and <b>FAQS</b>"><i class="icon fa fa-book"></i><span class="head-span"> Blog</span></a></li>
+			    </ul>
+				<ul class="nav navbar-nav  pull-right hidden-xs">
+					<li style="margin:0 0 0 30%">
+					  <form class="navbar-form  navbar-right input-append">
+						 <div class="form-group">
+							<div class="input-group">
+								<input type="text" id="search-filter" class="form-control searchbox-radius"  placeholder="filter results or search" ng-model="input">
+								<a class="input-search-icon"><i class="icon fa fa-search "></i></a>
+							 </div>  
+						 </div>
+					  </form>
+				   </li> 
+			   </ul>
+			 </div>
+			 
+		  </div><!--./container-->
+	   </nav>
+    </header>
+	
+    <div class="input-group">
+		<input class="form-control search-xs hidden-sm hidden-md hidden-lg"  placeholder="search telectual" ng-model="input" ng-show="searchbox">
+		<a class="input-search-icon"><i class="icon fa fa-search"></i></a>
+	</div> 
+    <main role="main">
+      <!-- WELCOME SECTION -->
+	  <section id="welcome">
+	     <div class="container">
+			 <div class="col-sm-8 welcome-container">
+				 <h1>Your lecture log</h1>
+				 <h3>easily create full-fledge courses and share with your friends and the world</h3>
+			 </div>
+			 <div class="col-sm-4 signup-container" ng-show="!signIn && !validateNew">
+			     <form name="signUpForm" novalidate ng-submit="validateSignUp(newUser)">
+				    <div class="form-group">
+					    <input name="newName" type="text"  class="form-control signup-input" required
+						      ng-model="newUser.name" placeholder="Enter your user name"> 
+					</div>
+					<div class="form-group">
+					    <input name="userEmail" type="email"  class="form-control signup-input" required
+						       ng-model="newUser.email" placeholder="Enter your valid email address here"> 
+					</div>
+					<div class="form-group">
+					    <input name="userPassword" type="password"  class="form-control signup-input" required
+						       ng-model="newUser.password" placeholder="Enter your password here"
+							   ng-click="misMatchError=false">						   
+					</div>
+					<div>
+                       <h5>By clicking the " sign up for isubset " button, you agree to our <a href="#/index.html">terms of services</a> and <a href="#/index.html">privacy policy</a></h5>
+					</div>
+					 <button class="btn btn-success btn-lg btn-block signup-input no-outline" type="submit"
+					         ng-disabled="signUpForm.$invalid">
+					     Sign up for <a><img class="img-rounded" src="img/leclog.png" alt="telectual" height="25"></a>
+					 </button> 
+				 </form>
+			 </div>
+			 
+			 <div class="col-sm-4 validate-container" ng-show="validateNew">
+			     <form name="validateForm" novalidate ng-submit="validateCode(newUser)">
+					<div class="form-group">
+					    <input name="validationCode" type="text"  class="form-control validate-input" required
+						       ng-model="newUser.code" placeholder="Enter validation code sent to your email">						   
+					</div>
+					 <button class="btn btn-success btn-lg btn-block validate-input no-outline" type="submit"
+					         ng-disabled="validateForm.$invalid">
+					     Validate Account
+					 </button> 
+				 </form>
+			 </div>
+			 
+			 <div class="signIn-container col-sm-4" ng-show="signIn">
+			     <form name="signInForm" novalidate ng-submit="validateSignIn(activeUser)"
+				       ng-class="showValidation ? 'validate' : ''">
+				     <div class="form-group">
+					    <input name="userName" type="text"  class="form-control signin-input" required
+						       ng-model="activeUser.name" placeholder="Enter your user name or email address"
+							   ng-click="submitError=false"> 
+					 </div>
+					 <div class="form-group">
+					    <input name="userPassword" type="password"  class="form-control signin-input" required
+						       ng-model="activeUser.password" placeholder="Enter your password here"
+							   ng-click="submitError=false"> 
+					 </div>
+					 <div class="checkbox">
+					    <label style="color:#fff;">
+							<input name="rememberMe" type="checkbox" 
+								   ng-model="activeUser.remember">  
+					        Remember my username and password on this device
+						</label>
+					 </div>
+					 <button class="btn btn-success btn-lg btn-block signin-input no-outline" type="submit"
+					         ng-disabled="signInForm.$invalid">
+					    Sign In
+					 </button> 
+				 </form>
+	         </div>
+		 </div>
+	  </section>
+	  
+      <!-- FEATURES SECTION -->
+      <section id="features">
+        <div class="container">
+          <h1>why you'll love <a><img class="img-rounded" src="img/leclog.png" alt="telectual" height="50"></a></h1>
+		  <h3> <a>Great features</a> to make teaching and learning a wonderful experience</h3>
+		  
+		    <div class="panel panel-default col-sm-12 featured">
+			   <div class="panel-body  col-sm-6">
+			      <div class="featured-item">
+					  <div class="icon-wrap">
+						   <i class="icon fa fa-cloud"></i>
+					  </div>
+					  <h2>Host Free Courses</h2>
+					  <p>
+						 With an initial <b>10GB</b> of space you can host over 5 standard courses equip with
+						 videos ,  pdfs , power-point slides and so much more.
+					  </p>
+				   </div>
+			   </div>
+			   <div class="panel-body  col-sm-6">
+			      <div class="featured-item">
+					  <div class="icon-wrap">
+						  <i class="icon fa fa-group"></i>
+					  </div>
+					  <h2>Learn And Teach</h2>
+					  <p>
+						Express your knowledge by being a teacher to others at the same time taking as much courses as you
+						can from your favourite teachers
+					  </p>
+				</div>
+			   </div>
+			   <div class="panel-body  col-sm-6">
+				  <div class="featured-item">
+					  <div class="icon-wrap">
+						  <i class="icon fa fa-comments"></i>
+					  </div>
+					  <h2>Forums</h2>
+					  <p>
+						 Get help from the general community here at telectual and also participate in solving problems
+						 together
+					  </p>
+				  </div> 
+			   </div>
+			   
+			   <div class="panel-body col-sm-6">
+			       
+				   <div class="featured-item">			  
+					  <div class="icon-wrap">
+						 <i class="icon fa fa-search-plus"></i>
+					  </div>
+					  <h2>Search Less </h2>
+					  <p>
+						 Take advantage of the object oriented style of information presentation by limiting 
+						 your search roughly by 50%
+					  </p>
+					</div>
+			   </div>
+			   <div class="panel-body col-sm-6">
+			        <div class="featured-item">
+					  <div class="icon-wrap">
+						   <i class="icon fa fa-globe"></i>
+					  </div>
+					  <h2>Be World Class</h2>
+					  <p>
+						 Get to connect with like minded people all over the world from any walk of life that
+						 interests you				 
+					  </p>
+					</div>
+			   </div>
+			    <div class="panel-body col-sm-6">
+			        <div class="featured-item">
+					  <div class="icon-wrap">
+						  <i class="icon fa fa-coffee"></i>
+					  </div>
+					  <h2>Study At Your Pace</h2>
+					  <p>
+						 With your laptop , tablet or mobile phone , comfy slippers and pajamas , you are good
+						 to go
+					  </p>
+					</div>
+			   </div>
+			</div>
+
+        </div><!-- /.container -->
+      </section>
+    </main>
+    <footer role="contentinfo">
+		<div class="container">
+		   <div class="row">
+			  <div class="col-xs-4 col-md-2">
+				 <h3>Partners</h3>
+				  <ul>
+					<li><a href="#">Coursera</a></li>
+					<li><a href="#">Edmondo</a></li>
+					<li><a href="#">TeachQuest</a></li>
+					<li><a href="#">Wiki</a></li>
+					<li><a href="#">twitter</a></li>
+					<li><a href="#">CBN</a></li>
+				  </ul>
+			  </div>
+			  <div class="col-xs-4 col-md-2">
+				 <h3>Founders</h3>
+				  <ul>
+					<li><a href="#">Muhammed Ali</a>  </li>
+					<li><a href="#">Moses</a></li>
+					<li><a href="#">***</a></li>
+					<li><a href="#">person 4</a></li>
+					<li><a href="#">person 5</a></li>
+					<li><a href="#">person 6</a></li>
+				  </ul>
+			  </div>
+			  <div class="col-xs-4 col-md-2">
+				 <h3>Other</h3>
+				  <ul>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="#">Help Desk</a></li>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">Location</a></li>
+					<li><a href="#">Projects</a></li>
+					<li><a href="#">Developers</a></li>
+				  </ul>
+			  </div>
+			  <div class="clearfix visible-sm"></div><!--clearfix for small screen-->
+			  <div class="col-sm-12 col-md-6 about-us">
+				 <h3>About Us</h3>
+				  <p>Started in 2013 ,leclog is an educational web application that sets out to make 
+					 sharing of quality educational content among individuals and institutions , <i>convenient and effective.</i> 
+					 Cutting across all works of life from the sciences to medicine  , from sports to theology , leclog applies
+					 the simple &quot;teacher and her students&quot; metaphor with a little twist that anybody can be a teacher
+					 as well as a student anyone..
+				  </p>
+				  <span class="pull-right">
+					  <a href="#"> See our blog </a>
+					  <a><img class="img-rounded" src="img/leclog.png" alt="leclog" height="20"></a>
+				  </div>
+				  
+			  </div>				  
+		   </div><!--./row-->
+		   
+		   <div class="social">
+				<ul class="social">
+				  <li><a href="#" ><i class="icon fa fa-twitter"></i></a></li>
+				  <li><a href="#" ><i class="icon fa fa-facebook"></i></a></li>
+				  <li><a href="#" ><i class="icon fa fa-linkedin"></i></a></li>
+				  <li><a href="#" ><i class="icon fa fa-google-plus"></i></a></li>
+				  <li><a href="#" ><i class="icon fa fa-github-alt"></i></a></li>
+				</ul>
+			   <p>&copy; 2013-2014 , all rights reserved www.leclog.com</p>
+		   </div>  
+		</div><!--./container-->
+    </footer>
+    <!-- JavaScript -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+  </div>

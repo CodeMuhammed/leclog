@@ -1,0 +1,191 @@
+{
+    "id":"new id",
+	"mainNav":["instructions" , "videos" , "materials" , "quizzies" ,"class-forum" ,"course-info"],
+	"contents":{
+	   "instructions":[
+	      {"title":"title one","description":"contents here which may include media contents like pictures gifs and illustrations"}  
+		],
+	   "videos":[
+	      {
+		     "title":"title one",
+			 "ref":"videos/video1.mp4",
+			 "description":"This is where you write brief intro about what's in the particular video"
+		  }
+	   ],
+	   "materials":{
+	      "textBooks":[{"name":"nldsfskmv" , "description":"short description of what book conntains" , "url":"link to amazon"}],
+		  "handouts":[{"name":"nldsfskmv", "description":"short description of what handout conntains" , "url":"link to amazon or your website"}],
+		  "externalReadings":[{"name":"nldsfskmv", "description":"short description of what to find there" , "url":"link your website or blog"}],
+		  "assignments":[{"name":"nldsfskmv", "description":"short description of what assignment contains" , "url":"your website"}]
+	   },
+	   "classForum": {
+		   "discussions": [
+		      {
+				"topic": "Say hello to class",
+				"description": [
+					{
+						"userImg": "img/leclog.png",
+						"date": "00:00:0000",
+						"by": "admin",
+						"post": "Hello there my name is muhammed ali",
+						"comment": []
+					}
+				]
+			 }
+		   ]
+	   },
+	   "quizzies": [
+		{
+			"title": "title of quiz one",
+			"duration": "30",
+			"description": "brief about what the quiz hopes to achieve and any useful insight into what to expect in the quiz",
+			"quiz": [
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option 1",
+						"option 2",
+						"option 3",
+						"option 4"
+					],
+					"answer": "0",
+					"yourAns": ""
+				},
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option a",
+						"option b",
+						"option c",
+						"option d"
+					],
+					"answer": "1",
+					"yourAns": ""
+				},
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option one",
+						"option two",
+						"option three",
+						"option four"
+					],
+					"answer": "2",
+					"yourAns": ""
+				},
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option 1",
+						"option 2",
+						"option 3",
+						"option 4"
+					],
+					"answer": "0",
+					"yourAns": ""
+				},
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option a",
+						"option b",
+						"option c",
+						"option d"
+					],
+					"answer": "1",
+					"yourAns": ""
+				},
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option one",
+						"option two",
+						"option three",
+						"option four"
+					],
+					"answer": "2",
+					"yourAns": ""
+				},
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option 1",
+						"option 2",
+						"option 3",
+						"option 4"
+					],
+					"answer": "0",
+					"yourAns": ""
+				},
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option a",
+						"option b",
+						"option c",
+						"option d"
+					],
+					"answer": "1",
+					"yourAns": ""
+				},
+				{
+					"question": "the question you want to ask the user",
+					"options": [
+						"option one",
+						"option two",
+						"option three",
+						"option four"
+					],
+					"answer": "2",
+					"yourAns": ""
+				}
+			],
+			"participants": [
+				{
+					"name": "participant one",
+					"img": "img/me.jpeg",
+					"score": 1
+				},
+				{
+					"name": "participant one",
+					"img": "img/me.jpeg",
+					"score": 1
+				},
+				{
+					"name": "participant one",
+					"img": "img/me.jpeg",
+					"score": 1
+				},
+				{
+					"name": "participant one",
+					"img": "img/me.jpeg",
+					"score": 1
+				}
+			]
+		}
+	],
+	   "courseBrief":{
+	   "courseId":{
+		  "courseRef":"this property is assigned when the course brief is being extracted at the server from the maincourse",
+		  "imageTumbnail":"img/leclog.png",
+		  "created":0,
+		  "courseBy":{
+			 "userRef":"gdfk485wknf45uw80ldsk45",
+			 "userName":"Muhammed Ali",
+			 "userImg":"img/leclog.png"
+		  }
+		},
+		"students":0,
+		"title":"Course Title",
+		"description":"A short description about the course",
+		"category":"general",
+		"courseAccess":"free",
+		"price":"0",
+		"ratings":{
+		   "likes":"0",
+		   "dislikes":"0",
+		   "featured":false
+		}
+	   }
+	}
+}

@@ -1,0 +1,17 @@
+<style>
+	.ngFade.ng-enter { 
+	   transition: .2s linear all; opacity: 0;
+	   transition-delay: .1s;
+	}
+	.ngFade.ng-enter-active { opacity: 1; }
+</style>
+<style>
+   .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+</style>
+<style>
+	form.validate .ng-invalid-required.ng-dirty { background-color: lightpink; }
+	form.validate .ng-invalid-email.ng-dirty {
+	background-color: lightgoldenrodyellow; }
+	div.error { color: red; font-weight: bold; }
+	div.success {color: green; font-weight: bold}
+</style>

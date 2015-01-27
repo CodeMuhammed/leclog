@@ -1,0 +1,16 @@
+<div class="col-sm-{{divWidth}} hidden-xs">
+   <ol class="breadcrumb">
+	  <li><a>{{mainNav[activeIndex]}}</a></li>
+	  <li><a>{{displayedMaterials}}</a></li>
+	  <li class="active">{{describedMaterial.name}}</li>
+   </ol>
+   <div class="alert alert-info" ng-show="describedMaterial==null || (describedMaterial==null && activeEditorIndex==-1)">
+      <span>Select a material and see a short description about it here</span>
+   </div>
+   <div class="panel-body" ng-show="activeEditorIndex==-1 || !editorMode" style="padding:0 .5em;">
+	   <small>
+		   <p>{{describedMaterial.description}}</p>
+		   <p><a>{{describedMaterial.url}}</a></p>
+	   </small>
+   </div>
+</div>

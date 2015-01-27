@@ -1,0 +1,80 @@
+<div class="panel panel-default" role="forum" ng-controller="classForumController">
+	<div class="col-sm-8 panel panel-default">
+		   <div class="panel-heading">{{discussion.topic | capitalizeAll}}</div>
+		   <div class="panel-body" style="padding:0;">
+				
+			   <div ng-repeat="post in discussion.description">	
+				  <div class="panel-body media">
+					 <a class="pull-left" href="#">
+					    <img class="media-object img-circle" src={{post.userImg}} alt="..." style="width:3em;">
+					 </a>
+					 <div class="media-body"> 
+					     <dt class="media-heading"><small><a>posted {{post.date}} by {{post.by | capitalizeAll}}</a></small></dt>
+					     <dd>
+							<span>{{post.post}}</span>
+						 </dd>
+						 
+						 <div style="margin-top:2em; margin-bottom:1em; background:#ccc; border-radius:3px; padding:.4em;" ng-controller="subCommentController"> 
+							 <div ng-repeat="comment in post.comment" >
+								<div class="media" style="margin-bottom:1.5em;">
+								   <a class="pull-left">
+									  <img class="media-object" src={{comment.userImg}} style="width:2em;">
+								   </a>
+								   <div class="media-body">
+								      <dt class="media-heading" style="font-size:.9em;"><small><a>{{comment.by | capitalizeAll}}</a></small></dt>
+									  <dd>
+										<small><span>{{comment.post}}</span></small>
+									 </dd>
+								  </div>
+								</div>
+							 </div>
+							 <input class="form-control" placeholder="reply this post" ng-hide="writeComment" ng-click="writeComment=true">
+						     <div class="panel-body" style="margin:0; padding:0;" ng-show="writeComment">
+								 <textarea style="margin-bottom:.1em;" class="form-control form-input" placeholder="comment here" ng-model="newComment.post"></textarea>
+								 <button class="btn btn-brand btn-block" ng-click="submitComment($index)">Submit</button>
+							 </div>
+						 </div>
+					 </div>
+				  </div>
+				  <hr class="divider">
+			   </div> 
+		   </div>
+		   <div class="panel-footer">
+			  <textarea style="margin-bottom:.1em;" class="form-control form-input" placeholder="New Post" ng-model="newPost"></textarea>
+			  <button class="btn btn-brand btn-block" ng-click="submitPost()">Submit</button>
+		   </div>
+	</div>
+	
+	<div class="col-sm-4">
+	  <div class="panel panel-default">
+		  <table class="table">
+		     <tr ng-hide="newTopic" class="discussion-heading">
+			   <th ng-click="toggleNew()">
+			      Topics
+				  <a class="btn btn-brand btn-xs pull-right" tooltip-placement="bottom" tooltip="Enter new Discussion">new</a>
+			   </th>
+			 </tr>
+			   <div class="input-group" ng-show="newTopic">
+				  <input type="text" class="form-control" placeholder="Enter new Topic" ng-model="newDiscussion">
+				  <a class="input-search-icon btn btn-default btn-xs" ng-click="toggleNew()">add</a>
+			   </div>
+		  </table>
+		  <div class="input-group">
+			 <input type="text" class="form-control" placeholder="filter results"ng-click="resetFilter()" ng-model="filterText">
+			 <a class="input-search-icon " ng-click="toggleNew()"><i class="icon fa fa-filter "></i></a>
+		  </div>
+		  <div class="forum-category panel-body">
+			  <div class="list-group">
+                 <span ng-show="inValidTopic" style="color:red ;text-align:center;">
+				    <small>invalid topic enter new</small>
+				 </span>		
+				 <a class="list-group-item" ng-repeat="subject in classForumData.discussions | filter:filterText" ng-click="discussThis($index)">
+					 <span class="discuss">
+					    {{subject.topic | capitalize}} <button class="btn btn-brand btn-xs pull-right no-outline"> {{subject.description.length}} </button>
+					 </span>
+			     </a>		 
+			   </div>
+		  </div>
+	   </div>
+	</div>
+</div>

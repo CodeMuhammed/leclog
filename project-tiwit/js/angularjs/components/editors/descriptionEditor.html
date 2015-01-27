@@ -1,0 +1,9 @@
+<div class="panel panel-body" ng-show="true">
+    <input class="form-control" type="text" placeholder="title of quiz" style="margin-bottom:1em" ng-model="tempQuiz.title">
+	<textarea class="form-control" placeholder="description here" style="margin-bottom:1em ; height:8em;" ng-model="tempQuiz.description"></textarea>
+	Duration: <i class="icon fa fa-caret-left fa-lg" style="font-size:3em" ng-click="adjust(-1)"></i> {{duration}} <i class="icon fa fa-caret-right fa-lg" style="font-size:3em" ng-click="adjust(1)"></i> mins
+	<div class="pager">
+		<button class="btn btn-default btn-sm" ng-click="cancel()"> cancel </button>
+		<button class="btn btn-brand btn-sm" ng-click="save()"> save </button>  
+	</div>
+</div>

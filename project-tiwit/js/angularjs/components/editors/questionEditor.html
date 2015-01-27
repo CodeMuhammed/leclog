@@ -1,0 +1,11 @@
+<div class="panel panel-body" ng-show="true">
+    (Q:{{activeQuestionIndex+1}})
+	<textarea class="form-control" style="height:8em; margin-bottom:1em;" placeholder="enter Question here" ng-model="tempQuiz.quiz[activeQuestionIndex].question"></textarea>
+	<span ng-repeat="q in ansOptions">
+    	<quiz-option index={{$index}}></quiz-option>
+	</span>
+	<div class="pager">
+		<button class="btn btn-default btn-sm" ng-click="cancel()"> cancel </button>
+		<button class="btn btn-brand btn-sm" ng-click="save()"> save </button>  
+	</div>
+</div>
