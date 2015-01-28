@@ -61,20 +61,20 @@
 		  </table>
 		  <div class="input-group">
 			 <input type="text" class="form-control" placeholder="filter results"ng-click="resetFilter()" ng-model="filterText">
-			 <a class="input-search-icon " ng-click="toggleNew()"><i class="icon fa fa-filter "></i></a>
+			 <a class="input-search-icon"><i class="icon fa fa-filter "></i></a>
 		  </div>
+		  
 		  <div class="forum-category panel-body">
 			  <div class="list-group">
                  <span ng-show="inValidTopic" style="color:red ;text-align:center;">
 				    <small>invalid topic enter new</small>
 				 </span>		
-				 <a class="list-group-item" ng-repeat="subject in classForumData.discussions | filter:filterText" ng-click="discussThis($index)">
-					 <span class="discuss">
-					    {{subject.topic | capitalize}} <button class="btn btn-brand btn-xs pull-right no-outline"> {{subject.description.length}} </button>
-					 </span>
+				 <a class="list-group-item" ng-repeat="subject in classForumData.discussions | filter:filterText" ng-class="$index==discussionIndex ? 'active' :''" ng-click="discussThis($index)">
+					 {{subject.topic | capitalize}} <button class="btn btn-brand btn-xs pull-right no-outline"> {{subject.description.length}} </button>
 			     </a>		 
 			   </div>
 		  </div>
+		  
 	   </div>
 	</div>
 </div>

@@ -16,22 +16,19 @@
 					  </th>
 				   </tr>
 			    </table>
+				
+			   <div class="input-group">
+				 <input type="text" class="form-control" placeholder="filter results"ng-click="resetFilter()" ng-model="filterText">
+				 <a class="input-search-icon "><i class="icon fa fa-filter "></i></a>
+			  </div>
 				   
-			    <div class="forum-category panel-body ngFade" ng-show="navPointer=='down'" style="max-height:40em; overflow:auto">
-				    <table class="table">	
-                         <div class="input-group" style="margin-bottom:.5em;">
-							   <input type="text" class="form-control" placeholder="filter results" ng-model="filterText">
-							   <a class="input-search-icon"><i class="icon fa fa-filter "></i></a>
-						 </div>					
-						 <div >
-							 <tr ng-repeat="menu in menuItems | filter:filterText">
-								<td ng-click="activate($index)" class="topic" ng-class="$index==activeIndex ? 'topic-active':''">
-								   {{menu | capitalize}}
-								   <span class="pull-right">{{getCategoryCount(menu)}}</span>
-								</td>
-							 </tr>
-						 </div>
-				     </table>
+			  <div class="panel-body ngFade" ng-show="navPointer=='down'">					
+					 <div class="list-group">
+						 <a ng-repeat="menu in menuItems | filter:filterText" class="list-group-item" ng-click="activate($index)" ng-class="$index==activeIndex ? 'active':''">
+						   {{menu | capitalize}}
+						   <span class="pull-right">{{getCategoryCount(menu)}}</span>
+						 </a>
+					 </div>
 				</div>
 		    </div>
 		</section>

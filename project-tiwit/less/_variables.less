@@ -20,6 +20,7 @@
 // Brand colors
 // -------------------------
 
+@brand-active :         #fbbc08;
 @brand-primary:         #00475F;
 @brand-success:         #5cb85c;
 @brand-warning:         #f0ad4e;
@@ -198,7 +199,7 @@
 @border-radius-small:       7px;
 
 //** Global color for active items (e.g., navs or dropdowns).
-@component-active-color:    #fff;
+@component-active-color:    darken(@brand-active , 10%);
 //** Global background color for active items (e.g., navs or dropdowns).
 @component-active-bg:       @brand-primary;
 
@@ -612,7 +613,7 @@
 //** Text color for content within disabled list items
 @list-group-disabled-text-color: @list-group-disabled-color;
 
-@list-group-link-color:         #555;
+@list-group-link-color:         @brand-primary;
 @list-group-link-hover-color:   @list-group-link-color;
 @list-group-link-heading-color: #333;
 
