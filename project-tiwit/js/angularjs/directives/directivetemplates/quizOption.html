@@ -1,5 +1,5 @@
 <div class="input-group" style="margin-bottom:1em;">
-	<input class="form-control" ng-model="tempQuiz.quiz[activeQuestionIndex].options[qIndex]">
+	<input class="form-control quiz-input" ng-model="tempQuiz.quiz[activeQuestionIndex].options[qIndex]">
 	<button class="btn btn-sm btn-default no-outline input-box-button" ng-click="setAnsIndex(qIndex)" ng-hide="ansIndex==qIndex"><i class="pull-right" style="color:red; font-weight:bold;">X</i></button>
 	<button class="btn btn-sm btn-default no-outline input-box-button" ng-show="ansIndex==qIndex"><i class="icon fa fa-check" style="color:green;"></i> </button>
 </div>

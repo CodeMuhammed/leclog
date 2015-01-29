@@ -5,8 +5,8 @@
 			 <div class="navbar-header">
 				<a class="navbar-brand brand-logo hidden-xs" ng-click="activateNav('explore')"><img ng-src="img/leclog.png" alt="leclog" height="40"></a>
 			    <a class="navbar-brand brand-logo visible-xs" ng-click="activateNav('explore')"><img ng-src="img/leclogs.png" alt="leclog" height="45"></a>
-				<i class="icon fa fa-search hidden-sm hidden-md hidden-lg nav-search"ng-click="searchbox=!searchbox"></i>
-				<button class="btn navbar-btn btn-brand signin-btn no-outline" ng-click="toggleSignIn()">{{option}}</button>
+				<button class="btn navbar-btn btn-default no-outline visible-xs nav-search" ng-click="searchbox=!searchbox"><i class="icon fa fa-search"></i></button>
+				<button class="btn navbar-btn btn-brand signin-btn no-outline hidden-xs" ng-click="toggleSignIn()">{{option}}</button>
 				<ul class="nav navbar-nav navbar" id="nav-static">
 				   <li class="active bottom-line">
 				      <a>
@@ -22,7 +22,7 @@
 				   </li>
 			    </ul>
 				<ul class="nav navbar-nav  pull-right hidden-xs">
-					<li style="margin:0 0 0 30%">
+					<li style="margin:0 0 0 20%">
 					  <form class="navbar-form  navbar-right input-append">
 						 <div class="form-group">
 							<div class="input-group">
@@ -61,11 +61,12 @@
 					    <input name="userEmail" type="email"  class="form-control signup-input" required
 						       ng-model="newUser.email" placeholder="Enter your valid email address here"> 
 					</div>
-					<div class="form-group">
-					    <input name="userPassword" type="password"  class="form-control signup-input" required
-						       ng-model="newUser.password" placeholder="Enter your password here"
-							   ng-click="misMatchError=false">						   
-					</div>
+					 <div class="input-group">
+						<input name="userPassword" type={{inputView}}  class="form-control signup-input" required
+						       ng-model="newUser.password" placeholder="Enter your password here"> 
+						<a class="btn btn-sm btn-default no-outline input-box-button" ng-click="toggleHiddenPassword()"><i class="icon fa fa-eye"></i></a>
+					 </div>
+					
 					<div>
                        <h5>By clicking the " sign up for isubset " button, you agree to our <a href="#/index.html">terms of services</a> and <a href="#/index.html">privacy policy</a></h5>
 					</div>
@@ -97,11 +98,12 @@
 						       ng-model="activeUser.name" placeholder="Enter your user name or email address"
 							   ng-click="submitError=false"> 
 					 </div>
-					 <div class="form-group">
-					    <input name="userPassword" type="password"  class="form-control signin-input" required
-						       ng-model="activeUser.password" placeholder="Enter your password here"
-							   ng-click="submitError=false"> 
+					 
+					 <div class="input-group">
+						<input name="userPassword" type={{inputView}}  class="form-control signin-input" required
+						       ng-model="activeUser.password" placeholder="Enter your password here">
 					 </div>
+					 
 					 <div class="checkbox">
 					    <label style="color:#fff;">
 							<input name="rememberMe" type="checkbox" 

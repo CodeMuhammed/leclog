@@ -7,7 +7,7 @@ angular.module("isubset")
 	  
 	  //This function takes care of toggling between sign in and sign up mode
 	  $scope.toggleSignIn = function(){ 
-	  
+	      $scope.inputView = "password";
 	      if($scope.signIn){
 		     $scope.option="Sign In";
 			 $location.path("sign-up");
@@ -49,6 +49,11 @@ angular.module("isubset")
 		 logService.log(angular.toJson(newUser));
 	  };
 
+	  //This determines if the input box is for password or not
+	  $scope.inputView = "password";
+	  $scope.toggleHiddenPassword = function(){
+	      $scope.inputView == "password" ?  $scope.inputView="text" :  $scope.inputView = "password";
+	  }
 	  
 	  /**===============incoming events =============================*/
 	       $scope.$on("emailSent" , function(event , args){

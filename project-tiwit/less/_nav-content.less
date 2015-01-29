@@ -105,14 +105,9 @@
     .nav-search{
 		position: absolute;
 		z-index: 100000;
-		top: 20%;
-		right: 5%;
+		top: 9%;
+		right: 0%;
 		color:@navbar-default-link-color;
-		@media(max-width: (@screen-md-max)){
-		   z-index: 100;
-		   top:25%;
-		   right: 3%;
-		}
 		&:hover,
 		&:active,
 		&:focus{
@@ -133,7 +128,7 @@
      position: absolute;
 	 border-radius:10px;
      top:3%;
-	 right:7%;
+	 right:3%;
 	 
 	 @media(max-width: (@screen-md-max)){
 		margin: 0;
@@ -188,6 +183,8 @@
 		
 		@media(max-width: (@screen-sm-max)){
 			 >a{
+			   padding:0 !important; 
+			   margin:0 !important;
 			   width:5em;
 			   span:first-child{
 			     float:left;
@@ -199,9 +196,11 @@
 		}
 		@media(min-width: (@screen-sm-max)){
 			 >a{
-			   
 			   span:first-child{
+			       padding:0 !important; 
+			   margin:0 !important;
 			     .col-xs-6 !important;
+				 
 			   }
 			   span:last-child{
 			      .col-xs-6 !important;
