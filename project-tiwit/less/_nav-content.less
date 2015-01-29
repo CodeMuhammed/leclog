@@ -185,7 +185,29 @@
 		      font-size:.9em;
 		   }
 		}
-	   
+		
+		@media(max-width: (@screen-sm-max)){
+			 >a{
+			   width:5em;
+			   span:first-child{
+			     float:left;
+			   }
+			   span:last-child{
+			      float:left;
+			   }
+			}
+		}
+		@media(min-width: (@screen-sm-max)){
+			 >a{
+			   
+			   span:first-child{
+			     .col-xs-6 !important;
+			   }
+			   span:last-child{
+			      .col-xs-6 !important;
+			   }
+			}
+		}
    }
    .bottom-line{
        outline:none;
