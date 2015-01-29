@@ -208,12 +208,6 @@ angular.module("isubset")
 	     $rootScope.$broadcast("getCourse" ,{courseId:index , client:"explore" , purpose:purpose});
 	  };
 	  
-	  //This takes care of toggling the explore menu view
-	  $scope.navPointer="down";
-	  
-	  $scope.toggleExploreMenu=function(){
-	      $scope.navPointer=="up" ?  $scope.navPointer="down": $scope.navPointer="up";
-	  };
    })
    
     /*this controller takes of course view*/////////////////////////////////////////////////////////////independent

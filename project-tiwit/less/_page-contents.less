@@ -59,12 +59,24 @@ body{
 }
 
 [role="main"]{
+   .category-filter{
+	  height:3em;
+   }
+   .selected-header{
+		color: #fff;
+		text-shadow:
+		-.05em -.05em .05em lighten(@brand-primary , 10%),
+		.03em .03em .05em @brand-primary ;
+   }
    h3{
      padding:0 0 0 10px;
 	 margin: 0;
 	 text-align:center;
 	}
 	.course-brief{
+	   .panel-footer{
+	      background-color:darken(#fff , 0%) !important;
+	   }
 	   margin-top:.5em;
 	   .footer-icon{
 		  padding-right: 2em;
@@ -76,12 +88,16 @@ body{
 		  font-size:.9em;
 		}
 		&:hover{
-		    .off-background;
+		    .panel-heading{
+			   padding: 7px 5px 10px 5px; //edited padding adjustment conforms withb the derfaults only that 3px was removed from the top
+			   border-top:3px solid @brand-active;
+			   color: darken(@brand-active , 10%);
+			}
 			.footer-icon{
-			   color:darken(@brand-primary , 10%);
+			   color:darken(@brand-active , 10%);
 			}
 			.footer-icon-last{
-			    color:darken(@brand-primary , 10%);
+			    color:darken(@brand-active , 10%);
 			}
 		}
 		@media(max-width: @screen-xs-max){
@@ -356,10 +372,10 @@ body{
 		    color: @gray-light;
 		 }
 	     .signup-input{
-		    border-radius:0px;
+		    border-radius:3px;
 		    width:100%;
 		    padding:right:0;
-			height:3.5em;
+			height:3em;
 			margin-bottom:0.9em
 		 }
 		 @media(max-width: @screen-xs-max){
@@ -369,20 +385,20 @@ body{
 	  .validate-container{
 	      padding:6em 2em  2em  2em;
 		  .validate-input{
-		     border-radius:0px;
+		     border-radius:3px;
 		     width:100%;
 		     padding:right:0;
-			 height:3.5em;
+			 height:3em;
 			 margin-bottom:0.9em
 		  }
 	  }
 	  .signIn-container{
-		  padding:2em 2em  2em  2em;
+		  padding:3em 2em  2em  2em;
 		  .signin-input{
-		    border-radius:0px;
+		    border-radius:3px;
 		    width:100%;
 		    padding:right:0;
-			height:3.5em;
+			height:3em;
 			margin-bottom:0.9em
 		 }
 		 .radio-box{
