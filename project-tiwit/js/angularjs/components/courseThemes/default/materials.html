@@ -4,6 +4,17 @@
    <div materials="externalReadings"></div>  
    <div materials="assignments"></div>  
 </div>
+<div class="hidden-xs col-sm-4">
+	<ol class="breadcrumb">
+	   <li><a>{{mainNav[activeIndex]}}</a></li>
+	   <li><a>{{displayedMaterials}}</a></li>
+	   <li class="active">{{describedMaterial.name}}</li>
+	</ol>
 
-<describe-material width="4" ></describe-material>
-<div class="col-sm-4" ng-include="getActiveEditor(activeEditorIndex , 'materials')"></div>
+	<div class="alert alert-info" ng-show="describedMaterial==null || (describedMaterial==null && activeEditorIndex==-1)">
+	   <span>Select a material and see a short description about it here</span>
+	</div>
+
+	<describe-material width="12"></describe-material>
+	<div class="ng-include="getActiveEditor(activeEditorIndex , 'materials')"></div>
+</div>

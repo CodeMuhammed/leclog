@@ -1,6 +1,8 @@
 <main role="main" ng-controller="profileController">
    <div class="panel-body category" id="explore">
-        <encryptor></encryptor>
+        <div class="profile-menu">
+		    <div class="col-xs-4"></div>
+		</div>
 		<section class="content-secondary ">
 		   <div class="panel panel-default panel-body-explore off-background col-sm-7" style="padding:0; margin:0;">
 		        <div class="panel-body profile-body">
@@ -38,7 +40,6 @@
 								  </div>
 								  <div style="margin:0;" ng-show="editInfo">
 									  <textarea class="form-control" ng-model="data.userProfile.aboutMe" style="margin-top:1em; height:20em;"></textarea>
-									  <button class="btn btn-brand btn-block" style="margin-top:1em;" ng-click="saveInfo()">save</button> 
 								  </div>
 							 </div>
 						   <div class="col-md-6" >
@@ -57,6 +58,7 @@
 									Website : <input class="form-control" ng-model="data.userProfile.website" style="margin-bottom:1em;">
 								  </div>
 							 </div>
+							 <button class="btn btn-brand btn-block" style="margin-top:1em;" ng-click="saveInfo()" ng-show="editInfo">save</button> 
 					  </div>
 			   </div>
 			   
@@ -94,20 +96,19 @@
 						   <a href="#/explore" ng-click="activateNav('explore')"> click here</a> to start exploring for courses
 					  </p>
 				</div>
-				<div class="panel panel-default course-brief" ng-repeat="course in data.learning" ng-show="learning">
+				<div class="panel panel-default course-brief col-sm-6" ng-repeat="course in data.learning" ng-show="learning">
 				  
 				   <div class="panel-heading">
 					  <div class="panel-title">
-						 <a href="#"><img ng-src={{course.imageTumbnail}} alt="sample product" /></a>
-						 <h3>{{course.title}}</h3>
+						 <h4>{{course.title}}</h4>
 					  </div>
 				   </div>
 				   <span ng-click="loadCourse($index , 'view')">
 					   <div class="panel-body">
-						    <div class="col-sm-5">
+						    <div class="">
 								 <img src="img/okwu.jpg" style="width:100%;">
 							  </div>
-							  <div class="col-sm-7">
+							  <div class="">
 								 <h5><b>Description</b></h5>
 								 <p>{{course.description}}</p>
 							  </div>

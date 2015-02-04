@@ -4,15 +4,17 @@ angular.module("isubset")
 	  $scope.signIn=true;
 	  $scope.validateNew = false;
 	  $scope.option="Sign Up";
+	  $scope.invOpt="Sign in";
 	  
 	  //This function takes care of toggling between sign in and sign up mode
 	  $scope.toggleSignIn = function(){ 
-	      $scope.inputView = "password";
 	      if($scope.signIn){
 		     $scope.option="Sign In";
+			 $scope.invOpt="Sign up";
 			 $location.path("sign-up");
 		  }else{
 		     $scope.option="Sign Up";
+			 $scope.invOpt="Sign in";
 			 $location.path("sign-in");
 		  }
 	      $scope.signIn=!$scope.signIn;
@@ -41,6 +43,7 @@ angular.module("isubset")
 	  //This method takes the information entered and creates a new user profile on the server
       //and then redirects the user to it
 	  $scope.validateSignUp = function(newUser){
+	     $scope.invOpt="Validate account";
 		 $rootScope.$broadcast("newUser" , {user:newUser});
 	  };
 	  
@@ -51,8 +54,8 @@ angular.module("isubset")
 
 	  //This determines if the input box is for password or not
 	  $scope.inputView = "password";
-	  $scope.toggleHiddenPassword = function(){
-	      $scope.inputView == "password" ?  $scope.inputView="text" :  $scope.inputView = "password";
+	  $scope.toggleHiddenPassword = function(view){
+	      $scope.inputView = view;
 	  }
 	  
 	  /**===============incoming events =============================*/

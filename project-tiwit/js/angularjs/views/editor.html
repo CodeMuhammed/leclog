@@ -1,10 +1,5 @@
 <main role="main" ng-controller="courseController" class="test-adjust">
 	<div class="row row-offcanvas row-offcanvas-left" ng-class="sideMenuActive()" ng-controller="editorController">
-	
-	      <button class="btn btn-default visible-xs no-outline" style="position:absolute; top:.7em; left:1em; z-index:1010;" 
-				  type="button" data-toggle="offcanvas" ng-click="toggleSideMenu()">
-					 <i class="icon fa fa-align-justify"></i>
-		  </button> 
 		  
 		  <div class="panel-heading subNav-container col-sm-11">
 			  <div class="input-group-btn">
@@ -22,11 +17,10 @@
 				  </h3>
 			  </div>
 		  </div>
-		  <div class=" col-xs-4 col-sm-2 sidebar-offcanvas" role="navigation">
-			  <div class="list-group" >
-				  <span href class="list-group-item menu-heading" style="padding-top:1.1em;">course navbar</span>
+		  <div class="list-group col-xs-4 col-sm-2 sidebar-offcanvas" role="navigation">
+			  <div class="list-group">	 
 				  <img src={{data.contents.courseBrief.courseId.imageTumbnail}} style="width:100%;">
-				  <a class="list-group-item" ng-repeat="nav in mainNav" ng-class="$index==activeIndex ? 'active' :''" ng-click="displayCategory($index)">{{nav}}</a>
+				  <a class="list-group-item" ng-repeat="nav in mainNav" ng-class="$index==activeIndex ? 'active' :''" ng-click="displayCategory($index)">{{nav | capitalize}}</a>
 			  </div>
 		  </div>
 		  <div class="col-xs-12 col-sm-9 col-lg-6" style="padding:0; margin:0 ;margin-bottom:3em;">

@@ -1,24 +1,35 @@
-<main role="main" ng-controller="exploreController">
+<main role="main" ng-controller="exploreController" class="test-adjust">
    <div class="panel-body" id="explore">
       <section class="content-primary col-sm-2">					
-			 <div class="list-group">
-				 <a class="list-group-heading">
+			 <div class="list-group" id="menu" style="margin-bottom:0; padding-bottom:0;">
+				 <a class="list-group-heading" ng-if="menuOpen">
 				   <div class="input-group">
-					 <input type="text" class="form-control category-filter" placeholder="filter results"ng-click="resetFilter()" ng-model="filterText">
-					 <a class="input-search-icon "><i class="icon fa fa-filter "></i></a>
+					 <input type="text" class="form-control category-filter" placeholder="filter menu " 
+					      ng-click="resetFilter()" ng-model="filterText">
+					 <a class="input-search-icon " ng-if="menuOpen"><i class="icon fa fa-filter "></i></a>
 				   </div>
 				 </a>
-				 <a ng-repeat="menu in menuItems | filter:filterText" class="list-group-item" ng-click="activate($index)" ng-class="$index==activeIndex ? 'active':''">
+				 <a ng-repeat="menu in menuItems | filter:filterText" class="list-group-item visible-xs" 
+				    ng-click="activate($index)" ng-class="$index==activeIndex ? 'active':''" ng-if="menuOpen">
+				   {{menu | capitalize}}
+				   <span class="pull-right">{{getCategoryCount(menu)}}</span>
+				 </a>
+				 
+				 <a ng-repeat="menu in menuItems | filter:filterText" class="list-group-item hidden-xs"
+ 				    ng-click="activate($index , 'nope')" ng-class="$index==activeIndex ? 'active':''" ng-show="menuOpen">
 				   {{menu | capitalize}}
 				   <span class="pull-right">{{getCategoryCount(menu)}}</span>
 				 </a>
 			 </div>
 		</section>
-		<section class="content-secondary col-sm-8">
+		
+		<section class="content-secondary col-sm-9" id="contents">
 		    <div class="panel panel-default row">
 			   <div class="panel panel-heading subNav-container col-xs-12"  style="padding-top:2.4em;">
 					<div class="input-group-btn">
-					   <h3 class="selected-header">{{selected | capitalize}}</h3><!--@DEBUG extra padding for headers in effect in IE-->
+					   <h3 class="selected-header">{{selected | capitalize}}</h3> <!--@DEBUG extra padding for headers in effect in IE-->
+					   <i class="icon fa fa-caret-up hidden-lg hidden-md hidden-sm" style="margin-right:1em; font-size: 2em;" 
+					      ng-click="toggleExploreMenu()"></i>
                        <sub-nav></sub-nav>
 					</div>
 			    </div>
@@ -59,33 +70,5 @@
 				</div>
 	</section>	
 	
-	<div class="col-sm-2 ads-box hidden-xs">
-	   <div class="panel panel-default">
-	      <div class="panel-heading">
-		      <span class="panel-title">
-			     Ads here
-			  </span>
-		  </div>
-		  <div class="panel-body">
-		     <a><img src="img/okwu.jpg"> name of advert</a>
-		     <span>
-			     life accusamus terry richardson ad squid. 3 w
-			 </span>
-		  </div>
-	   </div>
-	    <div class="panel panel-default">
-	      <div class="panel-heading">
-		      <span class="panel-title">
-			     Ads here
-			  </span>
-		  </div>
-		  <div class="panel-body">
-		     <a><img src="img/ads.jpg"> name of advert</a>
-		     <span>
-			     life accusamus terry richardson ad squid. 3 w
-			 </span>
-		  </div>
-	   </div>
-	</div>
    </div>
 </main>

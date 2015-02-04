@@ -42,6 +42,9 @@
 				$routeProvider.otherwise({
 					templateUrl: "/js/angularjs/views/courseExplorer.html"
 				});
+			})
+		    .config(function ($anchorScrollProvider) {
+			   $anchorScrollProvider.disableAutoScrolling();
 			});
 		</script>
 		<script src="js/angularjs/controllers/isubset.js"></script>

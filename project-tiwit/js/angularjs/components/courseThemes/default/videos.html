@@ -25,5 +25,10 @@
 		   <button class=" btn btn-default no-outline" ng-click="addNewItem('videos')">Add New <i class="icon fa fa-plus"></i></button>
 		</div>
 	 </div>
+	 	<ol class="breadcrumb col-sm-3 hidden-xs">
+	   <li><a>{{mainNav[activeIndex]}}</a></li>
+	   <li><a>{{displayedMaterials}}</a></li>
+	   <li class="active">{{describedMaterial.name}}</li>
+	</ol>
 	 <describe-material width="3"></describe-material>
  </div>

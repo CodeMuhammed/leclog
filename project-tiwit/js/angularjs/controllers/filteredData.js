@@ -44,7 +44,13 @@ angular.module("isubset")
    
    /*this controller takes care of tasks specific to explore controller like extending views that filteredDataCtrl does
     *not see as generic*/////////////////////////////////////////////////////////////////////////////////independent
-   .controller("exploreController" , function($scope ,$rootScope ,$filter , dataFactory , logService){
+   .controller("exploreController" , function($scope ,$rootScope ,$filter , $location , dataFactory , logService){
+	  //this shows or hide the explore side menu
+	  $scope.menuOpen = false;
+	  $scope.toggleExploreMenu = function(){
+	     $scope.menuOpen  ? $scope.menuOpen =false : $scope.menuOpen  = true;
+	  }
+	  
 	  
       $scope.data=dataFactory.getData("explore");
 	  $scope.me = dataFactory.getData("profile");
@@ -134,7 +140,7 @@ angular.module("isubset")
 	  //SOLUTION:to solve this problem whenever a category is to be activated , the data in the scope is filtered
 	  //manually using the $filter service which makes the data set sync thus indices of data in view and in scope matches
 	  //problem solved :-)
-	  $scope.activate=function(index){
+	  $scope.activate=function(index , nope){
 	     var temp=$scope.menuItems; //this is to ensure that the original menu is retrieved after the explore data has been activated on the filterd menu items
 	     if(angular.isDefined($scope.filterText)){
 		    $scope.menuItems=$filter("filter")($scope.menuItems , $scope.filterText);
@@ -152,7 +158,10 @@ angular.module("isubset")
 			}
 		 }
 		 $scope.menuItems=temp;
-		 $scope.selectCategory('recent');//from button controller	  
+		 $scope.selectCategory('recent');//from button controller 
+         if(nope!="nope"){
+		    $scope.toggleExploreMenu();	
+         } 			
 	  };
 	  $scope.activate(0);
 	  
@@ -240,7 +249,7 @@ angular.module("isubset")
 	   $scope.displayCategory=function(index){
 	      $scope.activeIndex = index;
 		  $rootScope.$broadcast("changeCourseNav" , {index:index});
-		  $scope.toggleSideMenu()
+		  $scope.toggleSideMenu();
 	   };
 	   /********************************************************************************************/
 	   $scope.getScreen=function(){
@@ -299,6 +308,7 @@ angular.module("isubset")
 	  $scope.describedMaterial={};
 	  $scope.describe = function(category , index){
 	     $scope.describedMaterial={};
+		 $scope.materialIndex=index;
 	     $scope.describedMaterial = $scope.data.contents.materials[category][index];
 	  }
 	  
@@ -306,6 +316,7 @@ angular.module("isubset")
 	  $scope.displayMaterials =function(category){
 	     $scope.displayedMaterials = category;
 		 $scope.describedMaterial=null;
+		 $scope.materialIndex;
 		 $rootScope.$broadcast("undoEdit" , {});
 	  }
 	  
