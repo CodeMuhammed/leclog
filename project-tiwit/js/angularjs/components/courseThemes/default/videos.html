@@ -1,8 +1,8 @@
  <div class="panel-group">
-     <div class="well col-sm-9">
+     <div class="col-sm-9">
 	     <div class="panel panel-default" ng-repeat="video in data.contents.videos" >
 		  <span ng-hide="activeEditorIndex==$index">
-			  <div class="panel-heading ins-vid" ng-click="setActiveInsVideo($index , 'videos')" ng-class="$index==activeInsVideo ? 'materials-active':''">
+			  <div class="panel-heading" ng-click="setActiveInsVideo($index , 'videos')" style="background-color:#E9EAED;">
 			     <div class="panel-title">
 				    <span>{{video.title | uppercase}}</span>
 					 <i class="icon fa fa-caret-right pull-right" ng-hide="$index==activeInsVideo"></i>
@@ -30,5 +30,8 @@
 	   <li><a>{{displayedMaterials}}</a></li>
 	   <li class="active">{{describedMaterial.name}}</li>
 	</ol>
-	 <describe-material width="3"></describe-material>
+	<small>
+	   <p>{{describedMaterial.description}}</p>
+	   <p><a>{{describedMaterial.url}}</a></p>
+   </small>
  </div>

@@ -31,16 +31,6 @@ angular.module("customDirectives" , [])
 		 templateUrl: "js/angularjs/directives/directivetemplates/materialsTemp.html"
 	  }
    })
-   .directive("describeMaterial" , function(){
-      return{
-	     link: function(scope , elem  , attrs){
-		    scope.divWidth = attrs["width"];
-		 },
-		 restrict: "E",
-		 scope:false,
-		 templateUrl: "js/angularjs/directives/directivetemplates/describeMaterial.html" 
-	  }
-   })
    .directive("encryptor" , function(){
 	   return{
 	     restrict: "E",

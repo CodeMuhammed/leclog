@@ -1,7 +1,7 @@
 /*Note in this encryption algorithm , 0 is taken as a symbol not a digit to maintain the integrity of the password*/
 angular.module("isubset")
    .value("_MULTIPLIER" , 88)
-   .controller("cryptController" , function($scope , _MULTIPLIER){
+   .controller("cryptController" , ["$scope" , "_MULTIPLIER" , function($scope , _MULTIPLIER){
 	   
       //helper functions up here
       var alpha = "abcdefghijklmnopqrstuvwxyz";
@@ -108,4 +108,4 @@ angular.module("isubset")
 		 decantedObj.sym=result;
 	  }
 	  
-   });
+   }]);

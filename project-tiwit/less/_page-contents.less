@@ -2,13 +2,16 @@
 //page Contents
 //-------------------------
 body{
-   background-color:darken(#E9EAED , 10%);
-   //background: #191919 url('../img/books.jpg') fixed center center no-repeat;
+   //background-color:#E9EAED;
+   background-color:#fff;
    a{
       &:hover{
 	     color: darken(@brand-primary , 10%);
 		 text-decoration:none;
 	  }
+   }
+   @media(min-width: (@screen-md-max)){
+     //padding:0 !important;
    }
 }
 
@@ -62,6 +65,11 @@ body{
 [role="main"]{
    .category-filter{
 	  height:3em;
+	  &:hover,
+	  &:focus{
+	    .off-background;
+	     border:1px solid transparent;
+	  }
    }
    .selected-header{
 		color: #fff;
@@ -74,9 +82,27 @@ body{
 	 margin: 0;
 	 text-align:center;
 	}
+	//this is custom css for exxplore menu list-group for others check list-group.less
+	#menu{
+	   .list-group-item{
+	      background:#E9EAED !important;
+		  border:1px solid transparent;
+		  &:hover{
+		     border-right:3px solid @brand-active;
+		  }
+	   }
+	}
 	.course-brief{
+	  background-color:#fff;
+	  @media(max-width: @screen-xs-max){
+	    margin-left:0;
+		padding :0;
+	  }
+	  padding:1em;
 	   .panel-footer{
-	      background-color:darken(#fff , 0%) !important;
+	      //border-radius:3px;
+		  border : 1px solid transparent !important;
+		  background: linear-gradient(to bottom , darken(#fff, 0%) 0%, darken(#fff , 10%));
 	   }
 	   margin-top:.5em;
 	   .footer-icon{
@@ -90,9 +116,6 @@ body{
 		}
 		&:hover{
 		    .panel-heading{
-			   padding: 7px 5px 10px 5px; //edited padding adjustment conforms withb the derfaults only that 3px was removed from the top
-			   border-top:3px solid @brand-active;
-			   color: darken(@brand-active , 10%);
 			}
 			.footer-icon{
 			   color:darken(@brand-active , 10%);
@@ -100,9 +123,6 @@ body{
 			.footer-icon-last{
 			    color:darken(@brand-active , 10%);
 			}
-		}
-		@media(max-width: @screen-xs-max){
-			
 		}
 	}
 	
@@ -124,13 +144,6 @@ body{
 	.course-view{
 	 //  display: block;
 	}
-	.ins-vid{
-	  background-color:lighten(@gray , 40%);
-	  &:hover{
-	     background-color:lighten(@brand-primary , 20%);
-	  }
-	}
-	
 	#learn-more{
 	    font-size: 1.3em;
 		line-height:1.2;
@@ -168,31 +181,25 @@ body{
 	   background-color:lighten(@brand-primary , 10%);
 	   text-align: center;
 	}
-	.materials{
-	   overflow:auto;
-	   margin:0;
-	   background-color:#fff;
-	   .panel-heading{
-	      background-color:lighten(@gray-lighter ,  0%);
+	.material{
+	   border-left:2px solid @brand-primary;
+	   padding-left:1em;
+	   margin-bottom:1em;
+	   .material-heading{
+	      
 	   }
-	   &:hover{
-		  .panel-heading{
-             background-color:lighten(@brand-primary ,  15%);
-			 .panel-title{
-			    color:#fff;
-			 }
-	      }
+	   .material-body{
+	       margin-left:1em;
+		   margin-top:.3em;
+	       padding:1em;
+		   background-color:lighten(#E9EAED , 5%);
 	   }
+	   
 	}
+
 	
-	.materials-active{
-		background-color:lighten(@brand-primary , 10%) !important;
-		.panel-title{
-			color:#fff;
-		 }
-	}
 	.panel-footer{
-	   background-color:lighten(@gray , 40%);
+	   background: linear-gradient(to bottom , darken(#fff, 0%) 0%, darken(#fff , 10%));
 	}
     .panel-body-explore{
 	    background-color:#fff;
@@ -341,23 +348,31 @@ body{
 	  .welcome-container{
 	     padding:2em 4em  3em  4em;
 		 .welcome-message{
-		     background-color: hsla(0 , 0  , 0 , .8);
-			 border-radius:3px;
+		     //background-color: hsla(0 , 0  , 0 , .8);
+			// border-radius:3px;
 		 }
 	      h1{
-			  font-size:4em;
+			  font-size:2.7em;
 			  color:#fff;
 			  text-align:center;
 			}
 		h3{
-		   font-size: 1.5em;
+		   font-size: 1.3em;
 		   color: @gray-lightest;
 		   text-align:center;
 		   margin-bottom:2em;
 		}
 		.details-container{
+		   background: linear-gradient(to bottom , darken(#E9EAED, 0%) 5%, darken(#E9EAED, 15%) 50%, darken(#E9EAED , 25%) 100%);
+		   //background:#E9EAED;
+		   .off-background;
+		   border-radius:3px;
 		   .details-heading{
+		      
 		      h3{
+			   
+			   color:#fff;
+			   text-shadow: -1px -1px darken(#E9EAED , 30%);
 			   font-size:2em;
 			   
 			   margin:0;
@@ -368,6 +383,11 @@ body{
 		   }
 		   padding:0em 2em  2em  2em;
 		   input{
+			   &:focus{ 
+			      .off-background;
+				  border:1px solid transparent;
+			   }
+		       
 				border-radius:3px;
 				width:100%;
 				padding:right:0;
@@ -381,6 +401,7 @@ body{
 			    background-color:hsla( 0, 0 ,0 ,.8);
 				border-radius:3px;
 				input{
+				   box-shadow:0 0 0 lighten(#000 , 5%);
 				   position:absolute;
 				   top:-1em;
 				   color: @gray-lightest;
@@ -389,17 +410,18 @@ body{
 			}
 			 
 			@media(max-width: @screen-xs-max){
-			   padding:3em 0 3em 0;
+			   //padding:3em 0 3em 0;
 			}
 		}
-		@media(max-width: @screen-xs-max){
+		
+		 @media(min-width: @screen-sm-max){
 		     padding:3em 2em  2em  2em;
 		    margin-top:.6em;
 			h1{
-			  font-size: 2.2em;
+			  font-size: 4em;
 			}
 			h3{
-			   font-size: 1.2em;
+			   font-size: 1.5em;
 			   color: @gray-lighter;
 			}
 		 }

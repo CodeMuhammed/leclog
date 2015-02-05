@@ -1,7 +1,16 @@
 angular.module("isubset")
    .value("activeClass" , "subNav-style-active")
    .value("sideMenuActiveClass" , "active")
-   .controller("filterButtonController" , function($scope , $rootScope ,$location , dataFactory ,   activeClass , sideMenuActiveClass , logService){
+   .controller("filterButtonController" , [
+         "$scope",
+  		 "$rootScope",
+		 "$location",
+		 "dataFactory",
+		 "activeClass",
+		 "sideMenuActiveClass",
+		 "logService",
+		 
+       function($scope , $rootScope ,$location , dataFactory ,   activeClass , sideMenuActiveClass , logService){
    
       //This function inits the application based on the current location
 	  function refresh(){
@@ -140,4 +149,4 @@ angular.module("isubset")
 		 return ""; 
 	  }; 
 	 
-   });
+   }]);

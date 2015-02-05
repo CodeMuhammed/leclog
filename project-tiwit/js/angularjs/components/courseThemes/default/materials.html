@@ -11,10 +11,7 @@
 	   <li class="active">{{describedMaterial.name}}</li>
 	</ol>
 
-	<div class="alert alert-info" ng-show="describedMaterial==null || (describedMaterial==null && activeEditorIndex==-1)">
+	<div class="alert alert-info">
 	   <span>Select a material and see a short description about it here</span>
 	</div>
-
-	<describe-material width="12"></describe-material>
-	<div class="ng-include="getActiveEditor(activeEditorIndex , 'materials')"></div>
 </div>

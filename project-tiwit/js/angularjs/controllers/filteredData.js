@@ -4,7 +4,14 @@
 
 angular.module("isubset")
    .constant("dataIncrementSize" , 4)
-   .controller("filteredDataController" , function($scope, $rootScope ,$location , dataIncrementSize , dataFactory , logService){
+   .controller("filteredDataController" ,[
+      "$scope",
+	  "$rootScope",
+	  "$location",
+	  "dataIncrementSize",
+	  "dataFactory",
+	  "logService",
+      function($scope, $rootScope ,$location , dataIncrementSize , dataFactory , logService){
 	  
      //This controller accepts an array of data via an event channel and paginates on them based on request
 	 /*How to use this controller
@@ -40,307 +47,324 @@ angular.module("isubset")
 			 if(count==dataIncrementSize)break;
 		  }
 	   };
-   })
+   }])
    
    /*this controller takes care of tasks specific to explore controller like extending views that filteredDataCtrl does
     *not see as generic*/////////////////////////////////////////////////////////////////////////////////independent
-   .controller("exploreController" , function($scope ,$rootScope ,$filter , $location , dataFactory , logService){
-	  //this shows or hide the explore side menu
-	  $scope.menuOpen = false;
-	  $scope.toggleExploreMenu = function(){
-	     $scope.menuOpen  ? $scope.menuOpen =false : $scope.menuOpen  = true;
-	  }
-	  
-	  
-      $scope.data=dataFactory.getData("explore");
-	  $scope.me = dataFactory.getData("profile");
-	  $scope.buttonNames=['recent' , 'all' , 'free' , 'paid'];
-	  $scope.buttons={recent:true , all:false , free:false , paid:false}; 
-	  				   
-	  /****************************************************************************************
-      *filtering based on selected buttons will be done in the controller while the view will *
-	  *be updated with it                                                                     *
-      *****************************************************************************************/
-	   //This portion of the code does filtering on actual data based on the buttons selected
-	  //var lastLogin = dataFactory.getData("profile").userProfile.lastLogin.dayCount;
-	  var isValid = function(data , button){
-	     if(button=="all"){
-			return true;
-		 }
-		 else if(button=="paid"){
-			return data.courseAccess=="paid";
-		 }
-		 else if(button=="free"){
-			return data.courseAccess=="free";
-		 }
-		 else if(button=="recent"){
-			return true;
-		 }
-	  };
-	  
-	  //uses the filter function to filter on the data
-	  var categoryFilterFn = function(data){
-	     for(var i=0; i<$scope.buttonNames.length; i++){
-		     if($scope.buttons[$scope.buttonNames[i]]){
-			    if(!isValid(data , $scope.buttonNames[i])){
-				   return false;
-				}
+   .controller("exploreController" , [
+      "$scope",
+	  "$rootScope",
+	  "$filter",
+	  "$location",
+	  "dataFactory",
+	  "logService",
+      function($scope ,$rootScope ,$filter , $location , dataFactory , logService){
+		  //this shows or hide the explore side menu
+		  $scope.menuOpen = false;
+		  $scope.toggleExploreMenu = function(){
+			 $scope.menuOpen  ? $scope.menuOpen =false : $scope.menuOpen  = true;
+		  }
+		  
+		  
+		  $scope.data=dataFactory.getData("explore");
+		  $scope.me = dataFactory.getData("profile");
+		  $scope.buttonNames=['recent' , 'all' , 'free' , 'paid'];
+		  $scope.buttons={recent:true , all:false , free:false , paid:false}; 
+						   
+		  /****************************************************************************************
+		  *filtering based on selected buttons will be done in the controller while the view will *
+		  *be updated with it                                                                     *
+		  *****************************************************************************************/
+		   //This portion of the code does filtering on actual data based on the buttons selected
+		  //var lastLogin = dataFactory.getData("profile").userProfile.lastLogin.dayCount;
+		  var isValid = function(data , button){
+			 if(button=="all"){
+				return true;
 			 }
-		 }
-		 return true;
-	  };
-	  
-	  var filterData = function(){
-	     $scope.filteredData = [];
-		  if(angular.isDefined($scope.selectedBriefs)){
-			for(var i=0; i<$scope.selectedBriefs.length; i++){
-			   if(categoryFilterFn($scope.selectedBriefs[i])){
-				  $scope.filteredData.push($scope.selectedBriefs[i]); 
-			   }
-			}
-		 }
-        sortIfRecent();
-	  };
-	  
-	  //this method sorts the filtered data by most recent
-	  //Algorithm :: store the array in tempData look for the smallest and transfer it 
-	  //to filteredData.. repeat until temp is empty
-	  function sortIfRecent(){
-	     if($scope.buttons["recent"]){
-			 var tempData = $scope.filteredData;
-			 $scope.filteredData=[];
-			 var min=0;
-			 while(tempData.length>0){
-				 for(var i=0; i<tempData.length; i++){
-					if(tempData[i].courseId.created <= tempData[min].courseId.created){
-					   min=i;
+			 else if(button=="paid"){
+				return data.courseAccess=="paid";
+			 }
+			 else if(button=="free"){
+				return data.courseAccess=="free";
+			 }
+			 else if(button=="recent"){
+				return true;
+			 }
+		  };
+		  
+		  //uses the filter function to filter on the data
+		  var categoryFilterFn = function(data){
+			 for(var i=0; i<$scope.buttonNames.length; i++){
+				 if($scope.buttons[$scope.buttonNames[i]]){
+					if(!isValid(data , $scope.buttonNames[i])){
+					   return false;
 					}
 				 }
-				 $scope.filteredData.push(tempData[min]);
-				 tempData.splice(min , 1);
-				 min=0;
-			 }  
-		 }
-	  };
+			 }
+			 return true;
+		  };
+		  
+		  var filterData = function(){
+			 $scope.filteredData = [];
+			  if(angular.isDefined($scope.selectedBriefs)){
+				for(var i=0; i<$scope.selectedBriefs.length; i++){
+				   if(categoryFilterFn($scope.selectedBriefs[i])){
+					  $scope.filteredData.push($scope.selectedBriefs[i]); 
+				   }
+				}
+			 }
+			sortIfRecent();
+		  };
+		  
+		  //this method sorts the filtered data by most recent
+		  //Algorithm :: store the array in tempData look for the smallest and transfer it 
+		  //to filteredData.. repeat until temp is empty
+		  function sortIfRecent(){
+			 if($scope.buttons["recent"]){
+				 var tempData = $scope.filteredData;
+				 $scope.filteredData=[];
+				 var min=0;
+				 while(tempData.length>0){
+					 for(var i=0; i<tempData.length; i++){
+						if(tempData[i].courseId.created <= tempData[min].courseId.created){
+						   min=i;
+						}
+					 }
+					 $scope.filteredData.push(tempData[min]);
+					 tempData.splice(min , 1);
+					 min=0;
+				 }  
+			 }
+		  };
 
-	  //all i have to add is take the data and seperate them into an array
-	  //containing the course categories and add a behaviiour on the view such
-	  //that when clicked will set the course briefs in focus to the specified
-	  //course briefs and the rest procedure will remain the same
-	  //
-	  $scope.menuItems=["sciences","arts","general" , "medicine","lifestyle","music", "economics","high-school","research","college",
-	                    "sciences1","arts1","general1" , "medicine1","lifestyle1","music1", "economics1","high-school1","research1","college1"
-	            ];
-	  $scope.selected=$scope.menuItems[0];
-	  
-	  //this activates the data set in a given category
-	  //NOTE: when the filter is applied to the view category  , the data set returned will be out of sync 
-	  //with the scope's data set so when an index from the view is returned to the scope , it loads data in a
-	  //different category index
-	  //SOLUTION:to solve this problem whenever a category is to be activated , the data in the scope is filtered
-	  //manually using the $filter service which makes the data set sync thus indices of data in view and in scope matches
-	  //problem solved :-)
-	  $scope.activate=function(index , nope){
-	     var temp=$scope.menuItems; //this is to ensure that the original menu is retrieved after the explore data has been activated on the filterd menu items
-	     if(angular.isDefined($scope.filterText)){
-		    $scope.menuItems=$filter("filter")($scope.menuItems , $scope.filterText);
-		 }
-	     
-	     $scope.activeIndex=index;
-		 $scope.selected=$scope.menuItems[index];
-		 $scope.selectedBriefs = [];
-		 
-		 if(angular.isDefined($scope.data.courseBriefs)){
-			for(var i=0; i<$scope.data.courseBriefs.length; i++){
-			   if($scope.data.courseBriefs[i].category==$scope.selected){
-				  $scope.selectedBriefs.push($scope.data.courseBriefs[i]);
-			   }
-			}
-		 }
-		 $scope.menuItems=temp;
-		 $scope.selectCategory('recent');//from button controller 
-         if(nope!="nope"){
-		    $scope.toggleExploreMenu();	
-         } 			
-	  };
-	  $scope.activate(0);
-	  
-	  //This returns the number of data in a given category
-	  $scope.getCategoryCount = function(menu){
-	     var count=0;
-		 
-		 if(angular.isDefined($scope.data.courseBriefs)){
-			for(var i=0; i<$scope.data.courseBriefs.length; i++){
-			   if($scope.data.courseBriefs[i].category==menu){
-				  count++;
-			   }
-			}
-		 }
-		 
-	     return count;
-	  }
-       	  
-	  /**===========handles incoming events==================**/
-	    
-	  $scope.$on("changeSelection" , function(event , args){
-	     if(args.context=="explore"){
-		    $scope.buttons=args.buttons;
-			filterData();
-			$rootScope.$broadcast("setPaginate" , {client:"explore" , data:$scope.filteredData});
-			$rootScope.$broadcast("loadData" , {client:"explore"});
-		 }
-	  });
-	  $scope.$on("paginate" , function(event , args){
-	     logService.log("data paginated"+args.data);
-		 $scope.shown=args.data;
-	  });
-	  /**====================================================**/
-	  //This takes care of loading more data to the view 
-	  $scope.loadMore=function(){
-	     $rootScope.$broadcast("loadData" , {client:"explore"});
-	  };
- 
-	  //This section controls the side box for posting announcements
-	  $scope.isOpen=false;
-	  $scope.postAnnouncement=function(){
-	     $scope.isOpen=!$scope.isOpen;
-		 !$scope.isOpen ? $scope.placeholder.head="Quick announcement to my students" : $scope.placeholder.head="Enter the subject here";
-	  };
-	  
-	  /**Initial run to set up data**/
-	  filterData();
-	  $rootScope.$broadcast("setPaginate" , {client:"explore" , data:$scope.filteredData});
-	  $rootScope.$broadcast("loadData" , {client:"explore"});
-	  
-	  /*when the eye is clicked the course view is loaded*/
-	  $scope.loadCourse=function(index , purpose){
-	     $rootScope.$broadcast("getCourse" ,{courseId:index , client:"explore" , purpose:purpose});
-	  };
-	  
-   })
+		  //all i have to add is take the data and seperate them into an array
+		  //containing the course categories and add a behaviiour on the view such
+		  //that when clicked will set the course briefs in focus to the specified
+		  //course briefs and the rest procedure will remain the same
+		  //
+		  $scope.menuItems=["sciences","arts","general" , "medicine","lifestyle","music", "economics","high-school","research","college",
+							"sciences1","arts1","general1" , "medicine1","lifestyle1","music1", "economics1","high-school1","research1","college1"
+					];
+		  $scope.selected=$scope.menuItems[0];
+		  
+		  //this activates the data set in a given category
+		  //NOTE: when the filter is applied to the view category  , the data set returned will be out of sync 
+		  //with the scope's data set so when an index from the view is returned to the scope , it loads data in a
+		  //different category index
+		  //SOLUTION:to solve this problem whenever a category is to be activated , the data in the scope is filtered
+		  //manually using the $filter service which makes the data set sync thus indices of data in view and in scope matches
+		  //problem solved :-)
+		  $scope.activate=function(index , nope){
+			 var temp=$scope.menuItems; //this is to ensure that the original menu is retrieved after the explore data has been activated on the filterd menu items
+			 if(angular.isDefined($scope.filterText)){
+				$scope.menuItems=$filter("filter")($scope.menuItems , $scope.filterText);
+			 }
+			 
+			 $scope.activeIndex=index;
+			 $scope.selected=$scope.menuItems[index];
+			 $scope.selectedBriefs = [];
+			 
+			 if(angular.isDefined($scope.data.courseBriefs)){
+				for(var i=0; i<$scope.data.courseBriefs.length; i++){
+				   if($scope.data.courseBriefs[i].category==$scope.selected){
+					  $scope.selectedBriefs.push($scope.data.courseBriefs[i]);
+				   }
+				}
+			 }
+			 $scope.menuItems=temp;
+			 $scope.selectCategory('recent');//from button controller 
+			 if(nope!="nope"){
+				$scope.toggleExploreMenu();	
+			 } 			
+		  };
+		  $scope.activate(0);
+		  
+		  //This returns the number of data in a given category
+		  $scope.getCategoryCount = function(menu){
+			 var count=0;
+			 
+			 if(angular.isDefined($scope.data.courseBriefs)){
+				for(var i=0; i<$scope.data.courseBriefs.length; i++){
+				   if($scope.data.courseBriefs[i].category==menu){
+					  count++;
+				   }
+				}
+			 }
+			 
+			 return count;
+		  }
+			  
+		  /**===========handles incoming events==================**/
+			
+		  $scope.$on("changeSelection" , function(event , args){
+			 if(args.context=="explore"){
+				$scope.buttons=args.buttons;
+				filterData();
+				$rootScope.$broadcast("setPaginate" , {client:"explore" , data:$scope.filteredData});
+				$rootScope.$broadcast("loadData" , {client:"explore"});
+			 }
+		  });
+		  $scope.$on("paginate" , function(event , args){
+			 logService.log("data paginated"+args.data);
+			 $scope.shown=args.data;
+		  });
+		  /**====================================================**/
+		  //This takes care of loading more data to the view 
+		  $scope.loadMore=function(){
+			 $rootScope.$broadcast("loadData" , {client:"explore"});
+		  };
+	 
+		  //This section controls the side box for posting announcements
+		  $scope.isOpen=false;
+		  $scope.postAnnouncement=function(){
+			 $scope.isOpen=!$scope.isOpen;
+			 !$scope.isOpen ? $scope.placeholder.head="Quick announcement to my students" : $scope.placeholder.head="Enter the subject here";
+		  };
+		  
+		  /**Initial run to set up data**/
+		  filterData();
+		  $rootScope.$broadcast("setPaginate" , {client:"explore" , data:$scope.filteredData});
+		  $rootScope.$broadcast("loadData" , {client:"explore"});
+		  
+		  /*when the eye is clicked the course view is loaded*/
+		  $scope.loadCourse=function(index , purpose){
+			 $rootScope.$broadcast("getCourse" ,{courseId:index , client:"explore" , purpose:purpose});
+		  };
+   }])
    
     /*this controller takes of course view*/////////////////////////////////////////////////////////////independent
-   .controller("courseController" , function($scope , $rootScope ,$location , logService , dataFactory ){ 
-       //This section takes care of the switching between editor mode and normal mode for course view
-	   $scope.editorMode=false;
-	  
-	   $scope.data={};
-	   //This takes care of data initialization
-	   $scope.initCourseData = function(){
-	       if(dataFactory.isDefined("course")){
-	          $scope.data.courseData = dataFactory.getData("course"); 
-			   
-		   }else {
-			  $scope.data.courseData = angular.copy(dataFactory.getData("newCourse")); 
-			  //sets the user variables on the new course
-			  $scope.data.courseData.contents.courseBrief.courseId.courseBy=dataFactory.getUserRef();
-		   }
-		   $scope.mainNav =$scope.data.courseData.mainNav;
-		   $scope.data.contents=$scope.data.courseData.contents;
-	   }
-	   $scope.initCourseData();
+   .controller("courseController" ,[ 
+      "$scope",
+	  "$rootScope",
+	  "$location",
+	  "logService",
+	  "dataFactory",
+      function($scope , $rootScope ,$location , logService , dataFactory ){ 
+		   //This section takes care of the switching between editor mode and normal mode for course view
+		   $scope.editorMode=false;
 		  
-	  
-	   /*This section sets the index of the side menu that is clicked and sets it as active in the view
-	    *since there are two categories of side menu , main and extras , the index of the extras nav will
-		*be its index + the size of the main nav so as for it to be a continuation  of it
-	    */
-	   $scope.activeIndex = 0;
-	   $scope.displayCategory=function(index){
-	      $scope.activeIndex = index;
-		  $rootScope.$broadcast("changeCourseNav" , {index:index});
-		  $scope.toggleSideMenu();
-	   };
-	   /********************************************************************************************/
-	   $scope.getScreen=function(){
-	      switch($scope.mainNav[$scope.activeIndex]){
-		     case "instructions":return '/js/angularjs/components/courseThemes/default/instructions.html';
-			 case "videos":return '/js/angularjs/components/courseThemes/default/videos.html';
-			 case "materials":return '/js/angularjs/components/courseThemes/default/materials.html';
-			 case "class-forum":return '/js/angularjs/components/courseThemes/default/class-forum.html';
-			 case "course-info":return '/js/angularjs/components/courseThemes/default/course-info.html';
-			 case "quizzies":return '/js/angularjs/components/courseThemes/default/quizzies.html';
+		   $scope.data={};
+		   //This takes care of data initialization
+		   $scope.initCourseData = function(){
+			   if(dataFactory.isDefined("course")){
+				  $scope.data.courseData = dataFactory.getData("course"); 
+				   
+			   }else {
+				  $scope.data.courseData = angular.copy(dataFactory.getData("newCourse")); 
+				  //sets the user variables on the new course
+				  $scope.data.courseData.contents.courseBrief.courseId.courseBy=dataFactory.getUserRef();
+			   }
+			   $scope.mainNav =$scope.data.courseData.mainNav;
+			   $scope.data.contents=$scope.data.courseData.contents;
+		   }
+		   $scope.initCourseData();
+			  
+		  
+		   /*This section sets the index of the side menu that is clicked and sets it as active in the view
+			*since there are two categories of side menu , main and extras , the index of the extras nav will
+			*be its index + the size of the main nav so as for it to be a continuation  of it
+			*/
+		   $scope.activeIndex = 0;
+		   $scope.displayCategory=function(index){
+			  $scope.activeIndex = index;
+			  $rootScope.$broadcast("changeCourseNav" , {index:index});
+			  $scope.toggleSideMenu();
+		   };
+		   /********************************************************************************************/
+		   $scope.getScreen=function(){
+			  switch($scope.mainNav[$scope.activeIndex]){
+				 case "instructions":return '/js/angularjs/components/courseThemes/default/instructions.html';
+				 case "videos":return '/js/angularjs/components/courseThemes/default/videos.html';
+				 case "materials":return '/js/angularjs/components/courseThemes/default/materials.html';
+				 case "class-forum":return '/js/angularjs/components/courseThemes/default/class-forum.html';
+				 case "course-info":return '/js/angularjs/components/courseThemes/default/course-info.html';
+				 case "quizzies":return '/js/angularjs/components/courseThemes/default/quizzies.html';
+			  }
+			  return "";
+		   }; 
+		   
+		   /**============================Handles incoming events===============================**/
+		   //This portion of the code takes care of transporting data to the different categories that makes up the course
+		   //That only displays the data but not modify it
+		   $scope.$on("getCategoryData" , function(event , args){
+			  logService.log(args.category+' sent'); 
+			  var result="";
+			  switch(args.category){
+				 case "classForum":{
+					result=$scope.data.contents.classForum;  
+				 }break;
+			  } 
+			   var userInfo = dataFactory.getUserRef();
+			   $rootScope.$broadcast("dataExtracted" , {
+				  data:result ,
+				  category:args.category , 
+				  user:userInfo.userName,
+				  userImg:userInfo.userImg
+			   }); 
+		   });
+		   
+		   //when course nav is changed
+		   $scope.$on("changeCourseNav" , function(event ,args){
+			  $scope.describedMaterial=null;
+			  $scope.activeInsVideo = 0;
+			  if($scope.mainNav[args.index]=="videos" || $scope.mainNav[args.index]=="instructions"){
+				 $scope.setActiveInsVideo(0 , $scope.mainNav[args.index]);
+			  }
+			  else if($scope.mainNav[args.index]=="materials"){
+				 $scope.displayedMaterials="textBooks";
+			  }
+		   });
+		   
+		   //this reset the course data with the new or updated data in the factory 
+		   $scope.$on("reset" , function(event , args){
+					 dataFactory.setProperty("course" , undefined);
+					 $scope.initCourseData();
+					 logService.log("reset course data event recieved");
+		   });
+		  /**===================================================================================**/
+		  
+		  //this section takes care of the behavior of course materials
+		  $scope.describedMaterial={};
+		  $scope.describe = function(category , index){
+			 $scope.describedMaterial={};
+			 $scope.materialIndex=index;
+			 $scope.describedMaterial = $scope.data.contents.materials[category][index];
 		  }
-		  return "";
-	   }; 
-	   
-	   /**============================Handles incoming events===============================**/
-	   //This portion of the code takes care of transporting data to the different categories that makes up the course
-	   //That only displays the data but not modify it
-	   $scope.$on("getCategoryData" , function(event , args){
-	      logService.log(args.category+' sent'); 
-	      var result="";
-	      switch(args.category){
-		     case "classForum":{
-			    result=$scope.data.contents.classForum;  
-		     }break;
-		  } 
-		   var userInfo = dataFactory.getUserRef();
-		   $rootScope.$broadcast("dataExtracted" , {
-		      data:result ,
-			  category:args.category , 
-			  user:userInfo.userName,
-			  userImg:userInfo.userImg
-		   }); 
-	   });
-	   
-	   //when course nav is changed
-	   $scope.$on("changeCourseNav" , function(event ,args){
-	      $scope.describedMaterial=null;
+		  
+		  //this takes care of collapsing the various materials category and also uncollapsing them
+		  $scope.displayMaterials =function(category){
+			 $scope.displayedMaterials = category;
+			 $scope.describedMaterial=null;
+			 $scope.materialIndex=null;
+			 $rootScope.$broadcast("undoEdit" , {});
+		  }
+		  
+		  //this takes care of collapsing and uncollapsing instructions and videos
 		  $scope.activeInsVideo = 0;
-		  if($scope.mainNav[args.index]=="videos" || $scope.mainNav[args.index]=="instructions"){
-		     $scope.setActiveInsVideo(0 , $scope.mainNav[args.index]);
-		  }
-		  else if($scope.mainNav[args.index]=="materials"){
-		     $scope.displayedMaterials="textBooks";
-		  }
-	   });
-	   
-	   //this reset the course data with the new or updated data in the factory 
-	   $scope.$on("reset" , function(event , args){
-				 dataFactory.setProperty("course" , undefined);
-				 $scope.initCourseData();
-				 logService.log("reset course data event recieved");
-	   });
-	  /**===================================================================================**/
-	  
-	  //this section takes care of the behavior of course materials
-	  $scope.describedMaterial={};
-	  $scope.describe = function(category , index){
-	     $scope.describedMaterial={};
-		 $scope.materialIndex=index;
-	     $scope.describedMaterial = $scope.data.contents.materials[category][index];
-	  }
-	  
-	  //this takes care of collapsing the various materials category and also uncollapsing them
-	  $scope.displayMaterials =function(category){
-	     $scope.displayedMaterials = category;
-		 $scope.describedMaterial=null;
-		 $scope.materialIndex;
-		 $rootScope.$broadcast("undoEdit" , {});
-	  }
-	  
-	  //this takes care of collapsing and uncollapsing instructions and videos
-	  $scope.activeInsVideo = 0;
-	  $scope.setActiveInsVideo = function(index  , category){
-	     $scope.describedMaterial={};
-	     $scope.activeInsVideo=index;
-		 if(category=="videos"){
-		     $scope.displayedMaterials=$scope.data.contents.videos[index].title;
-			 $scope.describedMaterial.description=$scope.data.contents.videos[index].description;
-			 $scope.describedMaterial.url=$scope.data.contents.videos[index].ref;
-		 }
-		 else if(category=="instructions"){
-		     $scope.displayedMaterials=$scope.data.contents.instructions[index].title;
-			 $scope.describedMaterial.description="hello";
-			 $scope.describedMaterial.url="hello";
-		 }
+		  $scope.setActiveInsVideo = function(index  , category){
+			 $scope.describedMaterial={};
+			 $scope.activeInsVideo=index;
+			 if(category=="videos"){
+				 $scope.displayedMaterials=$scope.data.contents.videos[index].title;
+				 $scope.describedMaterial.description=$scope.data.contents.videos[index].description;
+				 $scope.describedMaterial.url=$scope.data.contents.videos[index].ref;
+			 }
+			 else if(category=="instructions"){
+				 $scope.displayedMaterials=$scope.data.contents.instructions[index].title;
+				 $scope.describedMaterial.description="hello";
+				 $scope.describedMaterial.url="hello";
+			 }
 
-	  }
-   })
+		  }
+   }])
       
  /*This controller takes care of the editor view*/////////////////////////////////////////////////////////////////Tied to course controller
- .controller("editorController" , function($scope ,$rootScope ,  dataFactory , logService){
+ .controller("editorController" , [
+    "$scope",
+	"$rootScope",
+	"dataFactory",
+	"logService",
+    function($scope ,$rootScope ,  dataFactory , logService){
 	   $scope.setFocus=function(inFocus){
 	      $scope.inFocus=inFocus;
 	   };
@@ -526,10 +550,15 @@ angular.module("isubset")
 		      $scope.cancel();
 		   });
 	    /**===========================================================================**/
-   })
+   }])
    
    /*This controller takes care of the forum  for a specific class*///////////////////////////////////////////////////independent
- .controller("classForumController" , function($scope , $rootScope , $filter , logService){
+ .controller("classForumController" , [
+    "$scope",	
+	"$rootScope",
+	"$filter",
+	"logService",
+    function($scope , $rootScope , $filter , logService){
       
 	  /**============================Handles incoming events===============================**/
 	  $scope.$on("dataExtracted" , function(event  , args){
@@ -577,7 +606,7 @@ angular.module("isubset")
 		    $scope.classForumData.discussions=temp;
 		 }
 	  }
-	   //This function checks to see that the topic enter does not already exists
+	   //This function checks to see that the topic enter does not already exists e9eaed
 	  function topicExist(){
 	     for(var i=0; i<$scope.classForumData.discussions.length; i++){
 		    if($scope.classForumData.discussions[i].topic==$scope.newDiscussion){
@@ -606,10 +635,13 @@ angular.module("isubset")
 	      $scope.newTopic=! $scope.newTopic;
 	  };
 	  
- })
+ }])
  
  //this controller takes care of sub comment /////////////////////////////////////////////////////////////////////dependent on class forum controller
- .controller("subCommentController" , function($scope  , $filter){
+ .controller("subCommentController" ,[
+    "$scope",
+	"$filter",
+    function($scope  , $filter){
      $scope.writeComment=false;
      //This takes care of comments within a post
 	  $scope.newComment={};
@@ -623,10 +655,15 @@ angular.module("isubset")
 		  }
           $scope.writeComment=false;
 	  }
- })
+ }])
 
    //this controller takes care of the profile////////////////////////////////////////////////////independent
-   .controller("profileController" , function($scope , $rootScope , logService , dataFactory){
+   .controller("profileController" ,[
+      "$scope",
+	  "$rootScope",
+	  "logService",
+	  "dataFactory",
+      function($scope , $rootScope , logService , dataFactory){
       //inits data from factory
       $scope.data=dataFactory.getData("profile");
 	  
@@ -673,11 +710,17 @@ angular.module("isubset")
 		 
 	  };
 
-   })
+   }])
    
    
    //Quiz controller ////////////////////////////////////////////////////////////////////////////////independent
-   .controller("quizziesController" , function($scope , $rootScope ,  $timeout ,  logService , dataFactory){
+   .controller("quizziesController" ,[
+      "$scope",
+	  "$rootScope",
+	  "$timeout",
+	  "logService",
+	  "dataFactory",
+      function($scope , $rootScope ,  $timeout ,  logService , dataFactory){
         $scope.quizzies = $scope.data.contents.quizzies; //data gotten from the course controller
 		$scope.activeQuizIndex=-1;
 		$scope.activeQuestionIndex=0;
@@ -836,9 +879,13 @@ angular.module("isubset")
 		  });
 		  
 		/**=========================================================*/
-   })
+   }])
    //this controls the editing of the quizzies////////////////////////////////////////depends on quizzies controller
-   .controller("quizEditorController" , function($scope , $rootScope ,  logService){
+   .controller("quizEditorController" ,[
+      "$scope",
+	  "$rootScope",
+	  "logService",
+      function($scope , $rootScope ,  logService){
       //Deletes the quiz at the specific index
 	  $scope.deleteQuiz = function(index){
 	      $scope.quizzies.splice(index , 1);
@@ -929,4 +976,4 @@ angular.module("isubset")
 		  $scope.type="";
 	  });
 	  /**=================================================*/
-   });
+   }]);

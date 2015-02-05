@@ -1,30 +1,34 @@
-<div class="well materials">
-   <div class="panel panel-heading" ng-click="displayMaterials(tempCategory)" ng-class="displayedMaterials==tempCategory ? 'materials-active' :''">
+<div class="panel panel-default">
+   <div class="panel-heading" ng-click="displayMaterials(tempCategory)" ng-class="displayedMaterials==tempCategory ? 'materials-active' :''">
 	  <div class="panel-title">
 		  {{tempCategory}}
 		 <i class="icon fa fa-caret-right pull-right" ng-hide="displayedMaterials==tempCategory"></i>
 		 <i class="icon fa fa-caret-down pull-right" ng-show="displayedMaterials==tempCategory"></i>
 	  </div>
    </div>
-   <span ng-show="displayedMaterials==tempCategory">
-	   <div class="list-group">
-		 <a ng-repeat="item in data.contents.materials[tempCategory]" class="list-group-item" ng-click="describe(tempCategory , $index)">
-
-			<span ng-hide="$index==activeEditorIndex" class="">
+   <div  ng-show="displayedMaterials==tempCategory" class="panel-body">
+	   <div class="">
+		 <div ng-repeat="item in data.contents.materials[tempCategory]" class="material" ng-click="describe(tempCategory , $index)">
+		   <i class="icon fa fa-caret-right pull-right" ng-hide="$index==materialIndex;"></i>
+	       <i class="icon fa fa-caret-down pull-right" ng-show="$index==materialIndex;"></i>
+			<div ng-hide="$index==activeEditorIndex" class="material-heading">
 			   {{item.name}}
-				<div class="btn-group pull-right" ng-show="editorMode">
+			</div>
+			<div class="material-body" ng-show="$index==materialIndex;">
+			   <small ng-hide="$index==activeEditorIndex">
+				   <p>{{describedMaterial.description}}</p>
+				   <p><a>{{describedMaterial.url}}</a></p>
+			   </small>
+			   <div ng-include="getActiveEditor(activeEditorIndex , 'materials')"></div>
+			   <div class="btn-group pager" ng-show="editorMode && $index!=activeEditorIndex">
 					  <button class="btn btn-danger btn-xs " ng-click="deleteItem($index ,tempCategory)" ng-disabled="disableButton($index , tempCategory)"> del </button>
 					  <button type="button" class="btn btn-brand btn-xs "  ng-click="setActiveEditor($index , tempCategory)"> edit</button>
 				</div>
-			</span>
-			<div class="panel panel-default visible-xs" ng-if="$index==materialIndex;" style="margin-top:1em; background:#ccc">
-			   <describe-material width="12" ></describe-material>
-			   <div class="visible-xs" ng-include="getActiveEditor(activeEditorIndex , 'materials')"></div>
 			</div>
-		 </a>
+		 </span>
 	   </div>
 	   <div class="pager" ng-show="editorMode && activeEditorIndex==-1">
 		  <button class=" btn btn-default" ng-click="addNewItem(tempCategory)" style="outline:none">Add New <i class="icon fa fa-plus"></i></button>
 	   </div>
-   </span>
+   </div>
 </div>

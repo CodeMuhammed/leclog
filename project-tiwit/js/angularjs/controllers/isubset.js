@@ -1,5 +1,12 @@
 angular.module("isubset")
-   .controller("iController" , function($scope , $rootScope , $http , $location , dataFactory , logService){
+   .controller("iController" , [
+      "$scope",
+	  "$rootScope",
+	  "$http",
+	  "$location",
+	  "dataFactory",
+	  "logService",
+      function($scope , $rootScope , $http , $location , dataFactory , logService){
 		//reads the data from the server
 		var courseInfo={};
 		$http.get("js/angularjs/jsonData/courseBriefs.json")
@@ -102,4 +109,4 @@ angular.module("isubset")
 		 $scope.getAppScreen = function(){
 		    return angular.isDefined($scope.activeUser) && $scope.login? "js/angularjs/views/app.html" : "js/angularjs/views/login.html" ;
 		 }
-   });
+   }]);
