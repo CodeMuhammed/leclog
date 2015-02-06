@@ -37,10 +37,11 @@ body{
 }
 
 .course-adjust{
+    background-color:lighten(#E9EAED , 5%);
     min-height:30em;
 	@media(min-width: (@screen-sm-min)){
 		margin:0;
-		padding:3em;
+		padding:0 3em 3em 3em;
 		border-radius:0px;
    }
 }
@@ -104,7 +105,17 @@ body{
 		  }
 	   }
 	}
+	.course{
+	    background-color:lighten(#E9EAED , 5%) !important;
+	    @media(max-width: @screen-xs-max){
+			padding :0;
+		}
+	}
 	.course-brief{
+	     background-color:lighten(#E9EAED , 5%) !important;
+	  >div{
+	     .off-background;
+	  }
 	  border : 1px solid transparent !important;
 	  @media(max-width: @screen-xs-max){
 	    margin-left:0;
@@ -127,7 +138,8 @@ body{
 		  font-size:.9em;
 		}
 		&:hover{
-		    .panel-heading{
+		    .panel-title{
+			   color:darken(@brand-active , 10%);
 			}
 			.footer-icon{
 			   color:darken(@brand-active , 10%);
@@ -436,6 +448,10 @@ body{
 			   font-size: 1.5em;
 			   color: @gray-lighter;
 			}
+		 }
+	  
+		 @media(max-width: @screen-xs-min){
+		   padding:3em 0;
 		 }
 	  }
 	  

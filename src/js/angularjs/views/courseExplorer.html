@@ -22,7 +22,7 @@
 			 </div>
 		</section>
 		
-		<section class="content-secondary col-sm-9" id="contents">
+		<section class="content-secondary col-sm-9" id="contents" style="padding:0;margin:0;">
 		    <div class="container-fluid" style="padding:0;margin:0;">
 			   <div class="panel panel-default" style="padding:0;margin:0;">
 				   <div class="panel-heading subNav-container col-xs-12"  style="padding-top:2.4em;">
@@ -34,9 +34,9 @@
 						</div>
 					</div>
 					<div class="clearfix"></div>
-					<div class="panel-body">
-					   <div class="col-sm-6 course-brief" ng-repeat="course in shown" ng-hide="data.error" style="background-color:#fff;">
-						   <div class="panel panel-default off-background">
+					<div class="panel-body course">
+					   <div class="col-sm-6 course-brief" ng-repeat="course in shown" ng-hide="data.error">
+						   <div class="panel panel-default">
 							   <div class="">
 								  <div class="panel-title" style="text-align:center">
 									 <h5 class="title"> <b>{{course.title}}</b></h5>

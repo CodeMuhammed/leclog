@@ -1,5 +1,5 @@
- <div class="col-sm-9 panel panel-default course-adjust">
-       			     <course-title></course-title>
+ <div class="col-sm-8 panel panel-default course-adjust">
+       <course-title></course-title>
 	   <div class="panel panel-default" ng-repeat="topic in data.contents.instructions">
 			<span ng-hide="activeEditorIndex==$index">
 			   <div class="panel-heading" ng-click="setActiveInsVideo($index , 'instructions')" style="background-color:#E9EAED;">
@@ -27,7 +27,7 @@
 	      <button class=" btn btn-default no-outline" ng-click="addNewItem('instructions')">Add New <i class="icon fa fa-plus"></i></button>
 	   </div>
    </div>
-	<ol class="breadcrumb col-sm-3 hidden-xs">
+	<ol class="breadcrumb col-sm-4 hidden-xs">
 	   <li><a>{{mainNav[activeIndex]}}</a></li>
 	   <li><a>{{displayedMaterials}}</a></li>
 	   <li class="active">{{describedMaterial.name}}</li>
