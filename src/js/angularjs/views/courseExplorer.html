@@ -1,0 +1,78 @@
+<main role="main" ng-controller="exploreController" style="padding:0;margin:0;">
+   <div class="panel-body" id="explore" style="padding:0; margin:0;">
+      <section class="content-primary col-sm-3" style="background:#E9EAED !important;">					
+			 <div class="list-group" id="menu" style="margin-bottom:0; padding-bottom:0; text-align:right;">
+				 <a class="list-group-heading" ng-show="menuOpen">
+				   <div class="input-group">
+					 <input type="text" class="form-control category-filter" placeholder="filter menu " 
+					      ng-click="resetFilter()" ng-model="menuFilter">
+					 <a class="input-search-icon " ng-show="menuOpen"><i class="icon fa fa-filter "></i></a>
+				   </div>
+				 </a>
+
+				 <a ng-repeat="menu in menuItems | filter:menuFilter" class="list-group-item visible-xs col-sm-6" 
+				    ng-click="activate($index)" ng-class="$index==activeIndex ? 'active':''" ng-if="menuOpen">
+				   {{menu | capitalize}}
+				 </a>
+				 
+				 <a ng-repeat="menu in menuItems | filter:menuFilter" class="list-group-item hidden-xs col-sm-6"
+ 				    ng-click="activate($index , 'nope')" ng-class="$index==activeIndex ? 'active':''" ng-show="menuOpen">
+				   {{menu | capitalize}}
+				 </a>
+			 </div>
+		</section>
+		
+		<section class="content-secondary col-sm-9" id="contents">
+		    <div class="container-fluid" style="padding:0;margin:0;">
+			   <div class="panel panel-default" style="padding:0;margin:0;">
+				   <div class="panel-heading subNav-container col-xs-12"  style="padding-top:2.4em;">
+						<div class="">
+						   <h3 class="selected-header">{{selected | capitalize}} Shelf</h3> 
+						   <i class="icon fa fa-caret-up hidden-lg hidden-md hidden-sm" style="margin-right:1em; font-size: 2em;" 
+							  ng-click="toggleExploreMenu()"></i>
+						   <sub-nav></sub-nav>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="panel-body">
+					   <div class="col-sm-6 course-brief" ng-repeat="course in shown" ng-hide="data.error" style="background-color:#fff;">
+						   <div class="panel panel-default">
+							   <div class="">
+								  <div class="panel-title" style="text-align:center">
+									 <h5 class="title"> <b>{{course.title}}</b></h5>
+								  </div>
+							   </div>
+							   <span ng-click="loadCourse($index , 'view')">
+								   <div class="panel-body">
+									  <div class="">
+										 <img src="img/okwu.jpg" style="width:100%;" class="img-rounded">
+									  </div>
+									  <div class="">
+										 <h5>Description</h5>
+										 <p style="font-size:.8em;">{{course.description}}</p>
+									  </div>
+								   </div>
+								   <div class="panel-footer">
+									  <a class="footer-icon"><i class="icon fa fa-thumbs-up"> {{course.ratings.likes}}</i></a>
+									  <a class="footer-icon"><i class="icon fa fa-thumbs-down"> {{course.ratings.dislikes}}</i></a>
+									  <a class="footer-icon"> {{course.price | currency}}</a>
+									  <a class="pull-right footer-icon-last">
+									  <i class="icon fa fa-eye"></i>
+									  </a>
+								   </div>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div ng-show="selectedBriefs.length==0" class="panel-body" style="background-color:#fff; min-height:60em;">
+					   <empty-category-message>
+					</div>
+					<div class="pager" ng-hide="shown.length<4">
+					   <button class=" btn btn-brand no-outline" ng-click="loadMore()">Load More</button>
+					</div>
+				</div>
+			</div>
+	</section>		
+   </div>
+</main>

@@ -1,0 +1,102 @@
+<div role="info">
+	<div class="panel-body profile-body col-xs-12 col-sm-8 description">
+	  			     <course-title></course-title>
+	   <div class="panel-body">
+		  <table class="table">
+			 <span >
+				  <thead>
+					 <th>
+						Course Description
+						<a type="button" tooltip-placement="top" tooltip="edit description" class="btn btn-brand btn-xs pull-right"
+							 ng-click="setActiveEditor( 0 , 'courseBrief')"
+							 ng-show="editorMode">
+							   <i class="icon fa fa-edit"></i>
+							   edit
+						</a>
+					 </th>
+					 
+				  </thead>
+				  <tbody>
+					 <tr ng-hide="activeEditorIndex==0">
+						<td> 
+						  {{data.contents.courseBrief.description}}
+						</td>
+					 </tr>
+					 <tr>
+						<!--=================================================================-->
+							<td ng-include="getActiveEditor(0 , 'courseBrief')"></td>
+						<!--=================================================================-->
+					 </tr>	
+				  </tbody>
+			  
+				 
+			 </span> 
+		   </table>
+		   
+		 <span class="info-span col-xs-12">
+		   <table class="table">
+			  <tbody>
+				 <tr>
+					<td>Course by: </td>
+					<td>{{data.contents.courseBrief.courseId.courseBy.userName}}</td>
+				 </tr>
+				 <tr>
+					<td>Created: </td>
+					<td>{{data.contents.courseBrief.courseId.created}} days ago</td>
+				 </tr>
+				 <tr>
+					<td>Category: </td>
+					<td>{{data.contents.courseBrief.category}}</td>
+				 </tr>
+				 <tr>
+					<td>Access: </td>
+					<td  ng-show="!editorMode">{{data.contents.courseBrief.courseAccess}}</td>
+					<td>
+					   <div class="btn-group" ng-show="editorMode">
+					      <button class="btn btn-xs no-outline" ng-click="changeAccess()"
+  						     ng-class="data.contents.courseBrief.courseAccess=='free' ? 'btn-brand' : 'btn-default'">
+						        free
+						  </button>
+						   <button class="btn btn-xs no-outline" ng-click="changeAccess()"
+  						     ng-class="data.contents.courseBrief.courseAccess=='free' ? 'btn-default' : 'btn-brand'">
+						        paid
+						  </button>
+					   </div>
+					</td>
+				 </tr>
+				 <tr>
+					<td>price:</td>
+					<td ng-show="data.contents.courseBrief.courseAccess=='free' || !editorMode" >
+					   {{data.contents.courseBrief.price | currency}}
+					</td>
+					<td ng-show="editorMode">
+					   <div ng-show="data.contents.courseBrief.courseAccess=='paid'" >
+					       <small>price</small>
+						   <input class="form-control " style="width:3em;height:1.5em; display:inline" placeholder="$"
+							  ng-model="data.contents.courseBrief.price">
+					   </div>
+					</td>
+				 </tr>
+				  <tr>
+					<td>Ratings: </td>
+					<td>**********</td>
+				 </tr>
+			  </tbody>
+		   </table>
+	   </span>
+	 </div>
+		   
+   </div>
+    <div class="panel-body col-sm-4 students" style="border: 1px solid #ccc; border-radius: 1px;">
+	  <div style="text-align:center" class="breadcrumb">
+		 <h4>Students</h4>
+	  </div>
+	  <span style="padding-left:1em">
+		<img src="img/me.jpeg" alt="student image" width="35"
+			ng-repeat="student in data.contents.courseBrief.students" ng-hide="data.contents.courseBrief.students*1==0"> 
+		 <div class="well" ng-show="data.contents.courseBrief.students*1==0">
+			No students yet!!
+		 </div>
+	  </span>
+	</div>
+</div>

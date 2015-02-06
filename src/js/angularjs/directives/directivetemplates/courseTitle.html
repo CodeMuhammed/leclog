@@ -1,0 +1,9 @@
+<div class="panel-heading explore-category">
+	  <div class="panel-title">
+		  <h3>
+			 <b>{{data.contents.courseBrief.title | capitalizeAll}}</b>
+			 <button type="button" class="btn btn-default btn-xs no-outline" ng-click="editTitle=!editTitle" ng-show="editorMode">edit title</button>
+			 <input class="form-control" placeholder="Enter Course Title Here" ng-model="data.contents.courseBrief.title" ng-show="editTitle">
+		  </h3>
+	  </div>
+  </div>
